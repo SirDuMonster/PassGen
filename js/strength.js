@@ -6,14 +6,21 @@
 const StrengthAnalyzer = (function() {
     'use strict';
 
-    // Strength levels
+    // Strength levels based on industry standards
+    // NIST and security researchers recommend:
+    // - 25-30 bits: Basic protection
+    // - 60-80 bits: Important accounts
+    // - 100+ bits: Critical/high-security
     const LEVELS = {
         WEAK: { name: 'Weak', key: 'weak', minEntropy: 0 },
-        FAIR: { name: 'Fair', key: 'fair', minEntropy: 28 },
-        GOOD: { name: 'Good', key: 'good', minEntropy: 36 },
-        STRONG: { name: 'Strong', key: 'strong', minEntropy: 60 },
-        VERY_STRONG: { name: 'Very Strong', key: 'very-strong', minEntropy: 80 }
+        FAIR: { name: 'Fair', key: 'fair', minEntropy: 30 },
+        GOOD: { name: 'Good', key: 'good', minEntropy: 50 },
+        STRONG: { name: 'Strong', key: 'strong', minEntropy: 70 },
+        VERY_STRONG: { name: 'Very Strong', key: 'very-strong', minEntropy: 90 }
     };
+
+    // Our actual wordlist size (for passphrase entropy)
+    const WORDLIST_SIZE = 3223;
 
     /**
      * Calculate character pool size based on password content
@@ -44,6 +51,7 @@ const StrengthAnalyzer = (function() {
 
     /**
      * Calculate entropy in bits
+     * Formula: E = L × log₂(R) where L = length, R = pool size
      * @param {string} password - Password to analyze
      * @returns {number} Entropy in bits
      */
@@ -59,15 +67,16 @@ const StrengthAnalyzer = (function() {
     /**
      * Calculate entropy for passphrase
      * @param {number} wordCount - Number of words
-     * @param {number} wordlistSize - Size of wordlist (default EFF = 7776)
+     * @param {number} wordlistSize - Size of wordlist
      * @param {boolean} includesNumber - Whether a number is included
      * @returns {number} Entropy in bits
      */
-    function calculatePassphraseEntropy(wordCount, wordlistSize = 7776, includesNumber = false) {
+    function calculatePassphraseEntropy(wordCount, wordlistSize = WORDLIST_SIZE, includesNumber = false) {
+        // Each word adds log₂(wordlistSize) bits of entropy
         let entropy = wordCount * Math.log2(wordlistSize);
 
         if (includesNumber) {
-            // Add entropy for number position and value (0-99)
+            // Add entropy for number (0-99) and its position
             entropy += Math.log2(100) + Math.log2(wordCount + 1);
         }
 
@@ -76,17 +85,19 @@ const StrengthAnalyzer = (function() {
 
     /**
      * Estimate time to crack password via brute force
+     * Based on offline attack with fast hashing (SHA-1, MD5)
      * @param {number} entropy - Entropy in bits
      * @returns {string} Human-readable time estimate
      */
     function estimateCrackTime(entropy) {
         if (entropy <= 0) return 'Instant';
 
-        // Assume 10 billion guesses per second (modern hardware)
+        // 10 billion guesses/sec = modern GPU cluster with fast hash
+        // This matches zxcvbn's offline_fast_hashing_1e10_per_second
         const guessesPerSecond = 10e9;
 
-        // Total possible combinations = 2^entropy
-        // Average tries = half of that
+        // Total combinations = 2^entropy
+        // Average tries to find = half (50% probability)
         const totalCombinations = Math.pow(2, entropy);
         const averageTries = totalCombinations / 2;
         const secondsToCrack = averageTries / guessesPerSecond;
@@ -126,7 +137,6 @@ const StrengthAnalyzer = (function() {
 
         // For extremely large numbers, use scientific notation
         const exponent = Math.floor(Math.log10(years));
-        const mantissa = years / Math.pow(10, exponent);
         return `10^${exponent} years`;
     }
 
@@ -138,10 +148,7 @@ const StrengthAnalyzer = (function() {
     function formatCompact(num) {
         if (num < 10) return num.toFixed(1);
         if (num < 1000) return Math.round(num).toLocaleString('en-US');
-
-        // For thousands, use K notation
         if (num < 1e6) return `${(num / 1e3).toFixed(1)}K`;
-
         return Math.round(num).toLocaleString('en-US');
     }
 
@@ -183,7 +190,7 @@ const StrengthAnalyzer = (function() {
      * @returns {Object} Analysis result
      */
     function analyzePassphrase(wordCount, includesNumber = false) {
-        const entropy = calculatePassphraseEntropy(wordCount, 7776, includesNumber);
+        const entropy = calculatePassphraseEntropy(wordCount, WORDLIST_SIZE, includesNumber);
         const level = getStrengthLevel(entropy);
         const crackTime = estimateCrackTime(entropy);
 
@@ -203,6 +210,7 @@ const StrengthAnalyzer = (function() {
         calculatePassphraseEntropy,
         estimateCrackTime,
         getStrengthLevel,
-        LEVELS
+        LEVELS,
+        WORDLIST_SIZE
     };
 })();
