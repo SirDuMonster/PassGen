@@ -116,31 +116,33 @@ const StrengthAnalyzer = (function() {
         const months = days / 30;
         if (months < 12) return `${Math.round(months)} months`;
 
-        const years = days / 365;
+        const years = days / 365.25;
+
         if (years < 1000) return `${Math.round(years)} years`;
+        if (years < 1e6) return `${formatCompact(years)} years`;
+        if (years < 1e9) return `${formatCompact(years / 1e6)} million years`;
+        if (years < 1e12) return `${formatCompact(years / 1e9)} billion years`;
+        if (years < 1e15) return `${formatCompact(years / 1e12)} trillion years`;
 
-        if (years < 1e6) return `${formatNumber(years)} years`;
-        if (years < 1e9) return `${formatNumber(years / 1e6)} million years`;
-        if (years < 1e12) return `${formatNumber(years / 1e9)} billion years`;
-
-        return `${formatNumber(years / 1e12)} trillion years`;
+        // For extremely large numbers, use scientific notation
+        const exponent = Math.floor(Math.log10(years));
+        const mantissa = years / Math.pow(10, exponent);
+        return `10^${exponent} years`;
     }
 
     /**
-     * Format large numbers
+     * Format numbers in compact form
      * @param {number} num - Number to format
      * @returns {string} Formatted number
      */
-    function formatNumber(num) {
+    function formatCompact(num) {
         if (num < 10) return num.toFixed(1);
-        if (num < 100) return Math.round(num).toString();
-        if (num < 1000) return Math.round(num).toString();
+        if (num < 1000) return Math.round(num).toLocaleString('en-US');
 
-        return num.toLocaleString('en-US', {
-            maximumFractionDigits: 0,
-            notation: 'compact',
-            compactDisplay: 'short'
-        });
+        // For thousands, use K notation
+        if (num < 1e6) return `${(num / 1e3).toFixed(1)}K`;
+
+        return Math.round(num).toLocaleString('en-US');
     }
 
     /**
