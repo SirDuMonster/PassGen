@@ -113,6 +113,27 @@ const Theme = (function() {
         }
     }
 
+    /**
+     * Set up theme toggle button
+     */
+    function setupToggleButton() {
+        const toggleBtn = document.getElementById('themeToggle');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', toggle);
+        }
+    }
+
+    // Auto-initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            setupToggleButton();
+        });
+    } else {
+        init();
+        setupToggleButton();
+    }
+
     // Public API
     return {
         init,
