@@ -3,17 +3,19 @@
 ## Brand
 - Name: PassGen
 - Tagline: "Secure passwords, instantly."
+- URL: https://passgen-liard.vercel.app
 
 ## Overview
-Build a modern, Apple-inspired password generator web app. Pure client-side JavaScript, no backend needed. Monetization via ads. Target: outperform outdated competitors like passwordsgenerator.net with superior UX and modern design.
+A modern, Apple-inspired password generator web app. Pure client-side JavaScript, no backend needed. Monetization via ads. Target: outperform outdated competitors like passwordsgenerator.net with superior UX and modern design.
 
 ## Tech Stack
 - HTML5 + CSS3 (vanilla, no frameworks)
 - Vanilla JavaScript (ES6+)
 - Zero dependencies
 - Ad placeholders ready for Google AdSense
+- Deployed on Vercel
 
-## Design Requirements
+## Design System
 
 ### Apple-Inspired UI
 - Clean, minimalist design with generous whitespace
@@ -25,13 +27,17 @@ Build a modern, Apple-inspired password generator web app. Pure client-side Java
   - Light mode: #ffffff bg, #f5f5f7 secondary, #1d1d1f text, #0071e3 accent
   - Dark mode: #000000 bg, #1c1c1e secondary, #f5f5f7 text, #0a84ff accent
 
-### Logo
-- "PassGen" clean wordmark
-- Favicon: Stylized lock or "P" icon
+### Navigation
+- Sticky header with logo and main navigation
+- Section tabs toolbar for quick tool access
+- Mobile hamburger menu with slide-out drawer
+- Unified footer across all pages
 
-## Core Features
+---
 
-### 1. Main Password Generator
+## Tools & Features
+
+### 1. Main Password Generator (`/`)
 - Length slider: 4-128 characters (synced with number input)
 - Toggle switches for: Uppercase, Lowercase, Numbers, Symbols
 - Real-time generation on any setting change
@@ -40,43 +46,88 @@ Build a modern, Apple-inspired password generator web app. Pure client-side Java
 - Large monospace password display
 
 ### 2. Password Strength Meter
-- Animated color bar (red → orange → yellow → green)
+- Animated color bar (red -> orange -> yellow -> green)
 - Labels: Weak / Fair / Good / Strong / Very Strong
 - Show entropy in bits
 - Show estimated crack time (e.g., "3 trillion years")
 
-### 3. Dark Mode
-- Auto-detect system preference
-- Manual toggle (sun/moon icon)
-- Persist choice in localStorage
-- Smooth color transitions
+### 3. Passphrase Generator (`/passphrase-generator/`)
+- Word-based passwords (correct-horse-battery style)
+- Word count: 3-8 words
+- Separator: hyphen, underscore, space, number
+- Capitalize options: none, first letter, ALL CAPS
+- Uses EFF wordlist embedded in JS
 
-### 4. Advanced Options (collapsible)
-- Exclude ambiguous characters: 0O1lI|
-- Exclude brackets/quotes: {}[]()\/'"
-- Custom symbols input
-- Minimum numbers required
-- Minimum symbols required
-- Begin with letter option
-- No repeating characters option
+### 4. PIN Generator (`/pin-generator/`)
+- Length: 4-12 digits
+- Option: No repeated digits
+- Option: No sequential digits (123, 321)
 
-### 5. Bulk Generator
+### 5. Bulk Password Generator (`/bulk-password-generator/`)
 - Generate 1-100 passwords at once
 - Display in scrollable list
 - Copy All button
 - Download as CSV button
 
-### 6. Passphrase Generator
-- Word-based passwords (correct-horse-battery style)
-- Word count: 3-8 words
-- Separator: hyphen, underscore, space, number
-- Capitalize options: none, first letter, ALL CAPS
-- Use EFF wordlist embedded in JS
+### 6. WiFi Password Generator (`/wifi-password-generator/`)
+- Optimized for WPA2/WPA3 networks
+- Length: 8-63 characters
+- Memory-friendly options
+- Device compatibility presets
 
-### 7. PIN Generator
-- Length: 4-12 digits
-- Option: No repeated digits
-- Option: No sequential digits (123, 321)
+### 7. Username Generator (`/username-generator/`)
+- **7 Style Options:**
+  - Creative (Adjective + Noun): SwiftWolf42
+  - Gaming: xXShadowNinjaXx
+  - Professional: john.smith
+  - Pronounceable: Tomaku
+  - Word + Numbers: player8472
+  - Random: xK7mP2nQ
+  - Custom Word: [user's word]_42
+- Generate 1-20 usernames at once
+- Click to copy functionality
+
+### 8. Memorable Password Generator (`/memorable-password-generator/`)
+- Pattern-based generation
+- Easy to remember, hard to guess
+- Multiple complexity levels
+
+### 9. Strong Password Generator (`/strong-password-generator/`)
+- High-entropy focused
+- Maximum security options
+- Preset configurations for different use cases
+
+### 10. Password Strength Checker (`/password-strength-checker/`)
+- Analyze existing passwords
+- Detailed strength breakdown
+- Security recommendations
+- Crack time estimation
+
+---
+
+## Content Sections
+
+### Blog (`/blog/`)
+- Security articles and guides
+- Password best practices
+- Industry news and updates
+
+### Compare (`/compare/`)
+- PassGen vs LastPass
+- PassGen vs Bitwarden
+- PassGen vs 1Password
+- Best Password Generators overview
+
+### Glossary (`/glossary/`)
+- Security terminology definitions
+- Educational resource
+
+### Static Pages
+- About (`/about/`)
+- Privacy Policy (`/privacy/`)
+- Terms of Service (`/terms/`)
+
+---
 
 ## Security Requirements
 - MUST use `crypto.getRandomValues()` - never Math.random()
@@ -84,72 +135,55 @@ Build a modern, Apple-inspired password generator web app. Pure client-side Java
 - No data sent to any server
 - Document this prominently in UI ("Your passwords never leave your browser")
 
-## SEO Content Sections
-Include FAQ accordion with:
-- "Is PassGen safe to use?"
-- "What makes a strong password?"
-- "How does PassGen generate passwords?"
-- "Are my passwords stored anywhere?"
-- "How long should my password be?"
+---
 
-Add meta tags for SEO:
-- Title: "PassGen - Free Secure Password Generator"
-- Description: "Generate strong, random passwords instantly. 100% free, works offline, no data stored. Create secure passwords, PINs, and passphrases."
+## SEO
+- Meta tags on all pages
+- Schema.org structured data
+- FAQ sections with FAQ schema
+- Sitemap.xml
+- Robots.txt
+- Canonical URLs
 
-## Ad Placements
-Add placeholder divs with comments for:
-- Header banner (728x90) below main generator
-- Sidebar (300x250) on desktop
-- Footer banner (728x90)
-Do NOT add actual ad scripts, just clearly marked placeholders.
+---
 
 ## File Structure
 ```
 passgen/
 ├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   ├── generator.js    (password generation logic)
-│   ├── strength.js     (strength calculation)
-│   ├── wordlist.js     (EFF wordlist for passphrases)
-│   ├── theme.js        (dark mode handling)
-│   └── app.js          (main app initialization)
-├── assets/
-│   └── favicon.svg
+├── Project.md
+├── progress.md
+├── README.md
+├── favicon.ico
 ├── robots.txt
-└── sitemap.xml
+├── sitemap.xml
+│
+├── css/
+│   ├── style.css
+│   ├── pages.css
+│   └── navigation.css
+│
+├── js/
+│   ├── app.js
+│   ├── generator.js
+│   ├── strength.js
+│   ├── wordlist.js
+│   ├── theme.js
+│   ├── navigation.js
+│   └── username-generator.js
+│
+├── [tool-name]/
+│   └── index.html
+│
+├── blog/
+├── compare/
+├── glossary/
+├── about/
+├── privacy/
+└── terms/
 ```
 
-## UI Layout
-```
-┌─────────────────────────────────────────┐
-│  PassGen                    [🌙 Toggle] │
-├─────────────────────────────────────────┤
-│  ┌───────────────────────────────────┐  │
-│  │     xK9#mPq2$nL4vR7@             │  │
-│  │     [Copy]  [Regenerate]          │  │
-│  └───────────────────────────────────┘  │
-│                                         │
-│  ████████░░░ Strong · 89 bits          │
-│  Crack time: 3 trillion years           │
-│                                         │
-│  Length ──────●────── 16                │
-│                                         │
-│  ☑ Uppercase  ☑ Lowercase               │
-│  ☑ Numbers    ☑ Symbols                 │
-│                                         │
-│  ▼ Advanced Options                     │
-│                                         │
-│  [Password] [Passphrase] [PIN] ← tabs   │
-│                                         │
-│  ┌─ AD PLACEHOLDER 728x90 ───────────┐  │
-│                                         │
-│  ▼ FAQ Section                          │
-│                                         │
-│  PassGen © 2025 · Privacy · GitHub      │
-└─────────────────────────────────────────┘
-```
+---
 
 ## Performance Targets
 - Lighthouse: 95+ all categories
@@ -163,22 +197,15 @@ passgen/
 - Focus indicators
 - 4.5:1 color contrast minimum
 - Screen reader announcements for copy action
+- Skip to content links
 
 ## Browser Support
 - Chrome 80+, Firefox 75+, Safari 13+, Edge 80+
 - Mobile responsive (works on all screen sizes)
 
-## Implementation Order
-1. HTML structure + basic CSS
-2. Main password generator logic
-3. Strength meter
-4. UI styling (Apple aesthetic)
-5. Dark mode
-6. Advanced options
-7. Tabs: Bulk, Passphrase, PIN generators
-8. Copy functionality with toast
-9. SEO content + meta tags
-10. Ad placeholders
-11. Final polish + animations
+---
 
-Build this as a production-ready, polished web app that looks premium and works flawlessly.
+## Deployment
+- **Platform**: Vercel
+- **Repository**: GitHub (SirDuMonster/PassGen)
+- **Auto-deploy**: On push to master branch
