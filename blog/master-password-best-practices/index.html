@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating the Perfect Master Password for Your Password Manager | PassGen</title>
+    <meta name="description" content="Learn how to create a strong, memorable master password for your password manager. The one password you absolutely must get right.">
+    <meta name="keywords" content="master password, password manager, secure password, passphrase, vault password">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/blog/master-password-best-practices/">
+
+    <meta property="og:title" content="Creating the Perfect Master Password">
+    <meta property="og:description" content="The one password you must get right—your password manager master password.">
+    <meta property="og:url" content="https://passgen-liard.vercel.app/blog/master-password-best-practices/">
+    <meta property="og:type" content="article">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Creating the Perfect Master Password for Your Password Manager",
+        "description": "Learn how to create a strong, memorable master password.",
+        "author": {"@type": "Organization", "name": "PassGen"},
+        "publisher": {"@type": "Organization", "name": "PassGen"},
+        "datePublished": "2025-01-04",
+        "dateModified": "2025-01-04"
+    }
+    </script>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/blog.css">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../../" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="16" r="1"></circle>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                PassGen
+            </a>
+            <nav class="nav-links">
+                <a href="../../#features">Features</a>
+                <a href="../">Blog</a>
+                <a href="../../password-strength-checker/">Strength Checker</a>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="../../">Home</a>
+            <span class="separator">›</span>
+            <a href="../">Blog</a>
+            <span class="separator">›</span>
+            <span class="current">Master Password Best Practices</span>
+        </nav>
+
+        <article class="blog-article">
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="category">Guide</span>
+                    <span class="date">January 4, 2025</span>
+                    <span class="read-time">7 min read</span>
+                </div>
+                <h1>Creating the Perfect Master Password for Your Password Manager</h1>
+                <p class="article-subtitle">The one password that protects all your others</p>
+            </header>
+
+            <div class="article-content">
+                <p class="lead">Your master password is the single most important password you'll ever create. It protects your entire digital life. Here's how to make it uncrackable yet memorable.</p>
+
+                <h2>Why Your Master Password Matters</h2>
+                <p>Your master password:</p>
+                <ul>
+                    <li>Unlocks access to ALL your stored passwords</li>
+                    <li>Can't be recovered if forgotten (zero-knowledge encryption)</li>
+                    <li>Must be strong enough to resist offline attacks</li>
+                    <li>Must be memorable enough that you never write it down</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h3>The Unique Challenge</h3>
+                    <p>Unlike other passwords, you can't store your master password in your password manager. You must <strong>memorize</strong> it while making it <strong>uncrackable</strong>.</p>
+                </div>
+
+                <h2>The Solution: Random Passphrases</h2>
+                <p>A passphrase of random words provides the best balance of security and memorability.</p>
+
+                <h3>Why Words Beat Characters</h3>
+                <ul>
+                    <li>Humans remember words better than random characters</li>
+                    <li>5-6 random words provide excellent entropy (~65-77 bits)</li>
+                    <li>Longer = stronger, and words add length efficiently</li>
+                    <li>Easier to type accurately</li>
+                </ul>
+
+                <h2>How to Create Your Master Password</h2>
+
+                <h3>Step 1: Generate Random Words</h3>
+                <p>Use a tool to pick 5-6 words randomly. <strong>Don't choose the words yourself</strong>—humans are terrible at being random.</p>
+
+                <div class="good-example">
+                    <h4>Good: Randomly Generated</h4>
+                    <code>timber-lunar-harvest-ocean-crystal</code>
+                    <p>5 truly random words from a word list</p>
+                </div>
+
+                <div class="bad-example">
+                    <h4>Bad: Self-Selected</h4>
+                    <code>i-love-my-dog-fluffy</code>
+                    <p>Words you chose = words related to you = guessable</p>
+                </div>
+
+                <h3>Step 2: Add Complexity (Optional)</h3>
+                <p>For extra security without sacrificing memorability:</p>
+                <ul>
+                    <li>Capitalize one random word: timber-LUNAR-harvest-ocean-crystal</li>
+                    <li>Add a number: timber-lunar-42-harvest-ocean</li>
+                    <li>Use a different separator: timber.lunar.harvest.ocean</li>
+                </ul>
+
+                <h3>Step 3: Memorize Using a Story</h3>
+                <p>Create a mental image connecting the words:</p>
+                <p class="example-story"><em>"Under the <strong>timber</strong> bridge, the <strong>lunar</strong> light shone on the <strong>harvest</strong> floating across the <strong>ocean</strong> toward the <strong>crystal</strong> palace."</em></p>
+                <p>Vivid, weird images are easier to remember.</p>
+
+                <h3>Step 4: Practice Typing It</h3>
+                <p>Type your new master password several times daily for the first week. Muscle memory helps with long-term retention.</p>
+
+                <h2>How Strong Should It Be?</h2>
+                <p>Minimum recommendations for master passwords:</p>
+
+                <table class="strength-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Example</th>
+                            <th>Entropy</th>
+                            <th>Verdict</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>4 random words</td>
+                            <td>timber-lunar-harvest-ocean</td>
+                            <td>~51 bits</td>
+                            <td class="verdict-okay">Minimum</td>
+                        </tr>
+                        <tr>
+                            <td>5 random words</td>
+                            <td>timber-lunar-harvest-ocean-crystal</td>
+                            <td>~64 bits</td>
+                            <td class="verdict-good">Good</td>
+                        </tr>
+                        <tr>
+                            <td>6 random words</td>
+                            <td>timber-lunar-harvest-ocean-crystal-river</td>
+                            <td>~77 bits</td>
+                            <td class="verdict-great">Excellent</td>
+                        </tr>
+                        <tr>
+                            <td>5 words + number</td>
+                            <td>timber-lunar-42-harvest-ocean-crystal</td>
+                            <td>~70+ bits</td>
+                            <td class="verdict-great">Excellent</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>For most users, <strong>5-6 random words</strong> is the sweet spot.</p>
+
+                <h2>What NOT to Do</h2>
+
+                <div class="dont-list">
+                    <div class="dont-item">
+                        <h4>Don't use personal information</h4>
+                        <p>Names, birthdays, addresses, pets—all can be researched and guessed.</p>
+                    </div>
+                    <div class="dont-item">
+                        <h4>Don't use quotes or lyrics</h4>
+                        <p>"ToBeOrNotToBe" and "AllYouNeedIsLove" are in every password cracking dictionary.</p>
+                    </div>
+                    <div class="dont-item">
+                        <h4>Don't use keyboard patterns</h4>
+                        <p>"qwerty", "asdfghjkl", "1qaz2wsx"—these are among the first patterns attackers try.</p>
+                    </div>
+                    <div class="dont-item">
+                        <h4>Don't write it down digitally</h4>
+                        <p>No notes apps, no documents, no emails to yourself. These can be compromised.</p>
+                    </div>
+                    <div class="dont-item">
+                        <h4>Don't use your master password anywhere else</h4>
+                        <p>It should be 100% unique to your password manager.</p>
+                    </div>
+                </div>
+
+                <h2>Emergency Recovery Planning</h2>
+                <p>What if you forget your master password or become incapacitated?</p>
+
+                <h3>Option 1: Recovery Kit</h3>
+                <p>Many password managers provide a recovery kit during setup. Print it, store it in a physical safe or safety deposit box.</p>
+
+                <h3>Option 2: Trusted Contact</h3>
+                <p>Some password managers (1Password, Bitwarden) support emergency access—a trusted person can request access after a waiting period.</p>
+
+                <h3>Option 3: Split Password</h3>
+                <p>Write your master password in two halves, store each in a different secure location. Neither half alone is useful.</p>
+
+                <h2>Additional Security Measures</h2>
+
+                <h3>Enable 2FA on Your Password Manager</h3>
+                <p>Even with a strong master password, enable 2FA. Use a hardware security key if possible, or an authenticator app as backup.</p>
+
+                <h3>Use a Secure Secret Key (If Available)</h3>
+                <p>Some password managers (like 1Password) use a "secret key" in addition to your master password. This provides extra protection if the password is somehow compromised.</p>
+
+                <h3>Regular Security Audits</h3>
+                <p>Periodically review your password manager's security settings and connected devices.</p>
+
+                <h2>Master Password Checklist</h2>
+                <div class="checklist">
+                    <label><input type="checkbox"> 5-6 randomly generated words (not self-selected)</label>
+                    <label><input type="checkbox"> Not based on personal information</label>
+                    <label><input type="checkbox"> Not a famous quote, lyric, or phrase</label>
+                    <label><input type="checkbox"> Memorized (not written digitally)</label>
+                    <label><input type="checkbox"> Used only for the password manager</label>
+                    <label><input type="checkbox"> 2FA enabled on the password manager account</label>
+                    <label><input type="checkbox"> Recovery plan in place</label>
+                </div>
+
+                <h2>Summary</h2>
+                <p>Your master password needs to be two things that usually conflict: <strong>extremely secure</strong> and <strong>reliably memorable</strong>. Random passphrases solve this problem elegantly.</p>
+
+                <p>Generate 5-6 random words, memorize them with a story, practice typing them, and you'll have a master password that protects your entire digital life.</p>
+            </div>
+
+            <div class="article-cta">
+                <h3>Generate a Secure Passphrase</h3>
+                <p>Create the perfect master password with random words.</p>
+                <a href="../../passphrase-generator/" class="btn btn-primary">Generate Passphrase</a>
+            </div>
+        </article>
+
+        <section class="related-posts">
+            <h2>Related Articles</h2>
+            <div class="related-grid">
+                <a href="../passphrase-vs-password/" class="related-card">
+                    <h3>Passphrase vs Password</h3>
+                    <p>When words beat random characters.</p>
+                </a>
+                <a href="../password-manager-vs-browser/" class="related-card">
+                    <h3>Password Manager vs Browser</h3>
+                    <p>Choose the right tool for your passwords.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>PassGen</h4>
+                <p>Free, secure password generation tools.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="../../">Password Generator</a></li>
+                    <li><a href="../../passphrase-generator/">Passphrase Generator</a></li>
+                    <li><a href="../../password-strength-checker/">Strength Checker</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="../">Blog</a></li>
+                    <li><a href="../../glossary/">Glossary</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/theme.js"></script>
+    <style>
+        .warning-box { background: rgba(255, 149, 0, 0.1); padding: var(--spacing-lg); border-radius: var(--radius-lg); border-left: 4px solid #ff9500; margin: var(--spacing-xl) 0; }
+        .warning-box h3 { margin-bottom: var(--spacing-sm); color: #ff9500; }
+        .good-example, .bad-example { padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-md) 0; }
+        .good-example { background: rgba(52, 199, 89, 0.1); border: 1px solid rgba(52, 199, 89, 0.3); }
+        .bad-example { background: rgba(255, 59, 48, 0.1); border: 1px solid rgba(255, 59, 48, 0.3); }
+        .good-example h4, .bad-example h4 { margin-bottom: var(--spacing-sm); }
+        .good-example code, .bad-example code { display: block; font-family: monospace; font-size: 1.1rem; margin-bottom: var(--spacing-sm); }
+        .example-story { background: var(--surface-color); padding: var(--spacing-md); border-radius: var(--radius-md); font-style: italic; margin: var(--spacing-md) 0; }
+        .strength-table { width: 100%; border-collapse: collapse; margin: var(--spacing-lg) 0; }
+        .strength-table th, .strength-table td { padding: var(--spacing-md); text-align: left; border-bottom: 1px solid var(--border-color); }
+        .strength-table th { background: var(--surface-color); }
+        .verdict-okay { color: #ff9500; font-weight: 500; }
+        .verdict-good { color: #34c759; font-weight: 500; }
+        .verdict-great { color: #007aff; font-weight: 600; }
+        .dont-list { display: grid; gap: var(--spacing-md); margin: var(--spacing-lg) 0; }
+        .dont-item { background: rgba(255, 59, 48, 0.05); padding: var(--spacing-md); border-radius: var(--radius-md); border-left: 3px solid #ff3b30; }
+        .dont-item h4 { margin-bottom: var(--spacing-xs); }
+        .dont-item p { margin: 0; color: var(--text-secondary); }
+        .checklist { background: var(--surface-color); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0; }
+        .checklist label { display: block; padding: var(--spacing-sm) 0; cursor: pointer; }
+        .checklist input { margin-right: var(--spacing-sm); }
+    </style>
+</body>
+</html>

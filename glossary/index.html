@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Security Glossary - Terms & Definitions | PassGen</title>
+    <meta name="description" content="Learn password security terminology. Definitions for entropy, brute force, 2FA, hashing, salt, and other essential security concepts.">
+    <meta name="keywords" content="password glossary, security terms, password entropy, brute force attack, two-factor authentication, password hashing">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/glossary/">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "DefinedTermSet",
+        "name": "Password Security Glossary",
+        "description": "Definitions of common password and security terminology"
+    }
+    </script>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="16" r="1"></circle>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                PassGen
+            </a>
+            <nav class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../blog/">Blog</a>
+                <a href="../password-strength-checker/">Strength Checker</a>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="../">Home</a>
+            <span class="separator">›</span>
+            <span class="current">Glossary</span>
+        </nav>
+
+        <section class="hero">
+            <h1>Password Security Glossary</h1>
+            <p class="hero-subtitle">Essential terms and definitions for understanding password security</p>
+        </section>
+
+        <section class="content-section">
+            <div class="glossary-nav">
+                <a href="#b">B</a>
+                <a href="#c">C</a>
+                <a href="#d">D</a>
+                <a href="#e">E</a>
+                <a href="#h">H</a>
+                <a href="#k">K</a>
+                <a href="#m">M</a>
+                <a href="#p">P</a>
+                <a href="#r">R</a>
+                <a href="#s">S</a>
+                <a href="#t">T</a>
+            </div>
+
+            <div class="glossary-content">
+                <section id="b" class="glossary-section">
+                    <h2>B</h2>
+
+                    <div class="glossary-term" id="brute-force">
+                        <h3>Brute Force Attack</h3>
+                        <p>A method of cracking passwords by systematically trying every possible combination of characters until the correct one is found. Brute force attacks become exponentially harder as password length and character variety increase.</p>
+                        <p class="term-example"><strong>Example:</strong> An 8-character lowercase password has 208 billion possible combinations. Adding uppercase, numbers, and symbols increases this to 6 quadrillion.</p>
+                    </div>
+                </section>
+
+                <section id="c" class="glossary-section">
+                    <h2>C</h2>
+
+                    <div class="glossary-term" id="credential-stuffing">
+                        <h3>Credential Stuffing</h3>
+                        <p>An attack where stolen username/password pairs from one data breach are automatically tried against other websites. This exploits the common practice of password reuse across multiple accounts.</p>
+                        <p class="term-related"><strong>Prevention:</strong> Use unique passwords for every account.</p>
+                    </div>
+
+                    <div class="glossary-term" id="cryptographic-hash">
+                        <h3>Cryptographic Hash Function</h3>
+                        <p>A mathematical algorithm that converts any input into a fixed-size string of characters. Good password systems store hashes, not actual passwords. Common algorithms include bcrypt, Argon2, and PBKDF2.</p>
+                    </div>
+                </section>
+
+                <section id="d" class="glossary-section">
+                    <h2>D</h2>
+
+                    <div class="glossary-term" id="dictionary-attack">
+                        <h3>Dictionary Attack</h3>
+                        <p>A password cracking technique that uses a list of common words, phrases, and known passwords to guess credentials. More efficient than brute force for passwords based on real words.</p>
+                        <p class="term-example"><strong>Defense:</strong> Avoid dictionary words; use random characters or multiple unrelated words.</p>
+                    </div>
+
+                    <div class="glossary-term" id="data-breach">
+                        <h3>Data Breach</h3>
+                        <p>An incident where unauthorized individuals gain access to sensitive data, often including passwords or password hashes. Major breaches have exposed billions of credentials.</p>
+                    </div>
+                </section>
+
+                <section id="e" class="glossary-section">
+                    <h2>E</h2>
+
+                    <div class="glossary-term" id="entropy">
+                        <h3>Entropy</h3>
+                        <p>A measure of password randomness, expressed in bits. Higher entropy means more possible combinations and greater resistance to guessing. Calculated as: Length × log₂(Character Pool Size).</p>
+                        <p class="term-example"><strong>Example:</strong> A 16-character password using all character types (95 characters) has ~105 bits of entropy—considered very strong.</p>
+                    </div>
+                </section>
+
+                <section id="h" class="glossary-section">
+                    <h2>H</h2>
+
+                    <div class="glossary-term" id="hashing">
+                        <h3>Hashing</h3>
+                        <p>The process of converting a password into a fixed-length string using a hash function. Unlike encryption, hashing is one-way—you can't reverse it to get the original password. Websites should store password hashes, never plain-text passwords.</p>
+                    </div>
+                </section>
+
+                <section id="k" class="glossary-section">
+                    <h2>K</h2>
+
+                    <div class="glossary-term" id="keylogger">
+                        <h3>Keylogger</h3>
+                        <p>Malicious software that records keystrokes to capture passwords as they're typed. Can be software-based or a physical device attached to a keyboard.</p>
+                        <p class="term-related"><strong>Defense:</strong> Use anti-malware software, 2FA, and password managers with auto-fill.</p>
+                    </div>
+                </section>
+
+                <section id="m" class="glossary-section">
+                    <h2>M</h2>
+
+                    <div class="glossary-term" id="mfa">
+                        <h3>Multi-Factor Authentication (MFA)</h3>
+                        <p>Security requiring two or more verification methods: something you know (password), something you have (phone), or something you are (fingerprint). See also: Two-Factor Authentication.</p>
+                    </div>
+
+                    <div class="glossary-term" id="master-password">
+                        <h3>Master Password</h3>
+                        <p>The single password used to unlock a password manager vault. Should be strong and memorable since it protects all other passwords. Consider using a passphrase.</p>
+                    </div>
+                </section>
+
+                <section id="p" class="glossary-section">
+                    <h2>P</h2>
+
+                    <div class="glossary-term" id="passphrase">
+                        <h3>Passphrase</h3>
+                        <p>A password consisting of multiple random words, often separated by spaces or symbols. Easier to remember than random characters while maintaining high entropy.</p>
+                        <p class="term-example"><strong>Example:</strong> "correct-horse-battery-staple" (from XKCD) has ~44 bits of entropy with 4 words.</p>
+                        <p class="term-link"><a href="../passphrase-generator/">Generate a passphrase →</a></p>
+                    </div>
+
+                    <div class="glossary-term" id="password-manager">
+                        <h3>Password Manager</h3>
+                        <p>Software that securely stores, generates, and auto-fills passwords. Allows using unique, strong passwords for every account while only remembering one master password.</p>
+                    </div>
+
+                    <div class="glossary-term" id="phishing">
+                        <h3>Phishing</h3>
+                        <p>A social engineering attack that tricks users into revealing passwords by posing as a legitimate website or service. Often delivered via email or fake login pages.</p>
+                        <p class="term-related"><strong>Defense:</strong> Verify URLs, use 2FA, never click suspicious links.</p>
+                    </div>
+                </section>
+
+                <section id="r" class="glossary-section">
+                    <h2>R</h2>
+
+                    <div class="glossary-term" id="rainbow-table">
+                        <h3>Rainbow Table</h3>
+                        <p>A precomputed table of password hashes used to crack passwords quickly. Instead of computing each hash, attackers look up the hash in the table. Defeated by salting.</p>
+                    </div>
+                </section>
+
+                <section id="s" class="glossary-section">
+                    <h2>S</h2>
+
+                    <div class="glossary-term" id="salt">
+                        <h3>Salt</h3>
+                        <p>Random data added to a password before hashing. Ensures that identical passwords produce different hashes, defeating rainbow table attacks. Each password should have a unique salt.</p>
+                    </div>
+
+                    <div class="glossary-term" id="social-engineering">
+                        <h3>Social Engineering</h3>
+                        <p>Psychological manipulation to trick people into revealing sensitive information. Includes phishing, pretexting, and other non-technical attacks.</p>
+                    </div>
+                </section>
+
+                <section id="t" class="glossary-section">
+                    <h2>T</h2>
+
+                    <div class="glossary-term" id="2fa">
+                        <h3>Two-Factor Authentication (2FA)</h3>
+                        <p>Security method requiring two different types of verification. Typically a password plus a code from an authenticator app, SMS, or hardware key. Significantly reduces account compromise risk.</p>
+                        <p class="term-related"><strong>Best practice:</strong> Enable 2FA on all accounts that support it, especially email and financial accounts.</p>
+                    </div>
+
+                    <div class="glossary-term" id="totp">
+                        <h3>TOTP (Time-Based One-Time Password)</h3>
+                        <p>A type of 2FA that generates temporary codes (usually 6 digits) that change every 30 seconds. Used by authenticator apps like Google Authenticator and Authy.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="cta-box">
+            <h2>Put Your Knowledge to Use</h2>
+            <p>Generate strong passwords using best security practices.</p>
+            <a href="../" class="btn btn-primary">Generate a Password</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>PassGen</h4>
+                <p>Free, secure password generation tools.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="../">Password Generator</a></li>
+                    <li><a href="../passphrase-generator/">Passphrase Generator</a></li>
+                    <li><a href="../password-strength-checker/">Strength Checker</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="../blog/">Blog</a></li>
+                    <li><a href="../glossary/">Glossary</a></li>
+                    <li><a href="../compare/">Comparisons</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/theme.js"></script>
+    <style>
+        .glossary-nav { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-bottom: var(--spacing-2xl); padding: var(--spacing-md); background: var(--surface-color); border-radius: var(--radius-lg); }
+        .glossary-nav a { padding: var(--spacing-xs) var(--spacing-md); background: var(--card-bg); border-radius: var(--radius-sm); text-decoration: none; color: var(--text-color); font-weight: 600; transition: all var(--transition-fast); }
+        .glossary-nav a:hover { background: var(--primary-color); color: white; }
+        .glossary-content { max-width: 800px; }
+        .glossary-section { margin-bottom: var(--spacing-2xl); }
+        .glossary-section h2 { font-size: 1.5rem; color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: var(--spacing-sm); margin-bottom: var(--spacing-lg); }
+        .glossary-term { background: var(--card-bg); border-radius: var(--radius-lg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); border: 1px solid var(--border-color); }
+        .glossary-term h3 { margin-bottom: var(--spacing-sm); font-size: 1.2rem; }
+        .glossary-term p { color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--spacing-sm); }
+        .glossary-term p:last-child { margin-bottom: 0; }
+        .term-example { background: rgba(0, 122, 255, 0.08); padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--radius-sm); font-size: 0.95rem; }
+        .term-related { font-size: 0.95rem; font-style: italic; }
+        .term-link { margin-top: var(--spacing-sm); }
+        .term-link a { color: var(--primary-color); font-weight: 500; }
+    </style>
+</body>
+</html>

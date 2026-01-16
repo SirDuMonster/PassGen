@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker - Test How Secure Your Password Is | PassGen</title>
+    <meta name="description" content="Check how strong your password really is. Free password strength test shows crack time, vulnerabilities, and improvement tips. 100% private - nothing stored.">
+    <meta name="keywords" content="password strength checker, password strength test, how strong is my password, password checker, check password strength">
+    <meta name="author" content="PassGen">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/password-strength-checker/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Password Strength Checker - Test Your Password Security | PassGen">
+    <meta property="og:description" content="Check how strong your password really is. See estimated crack time and get improvement tips.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://passgen-liard.vercel.app/password-strength-checker/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Password Strength Checker">
+    <meta name="twitter:description" content="Test how secure your password really is.">
+
+    <!-- Favicon & Fonts -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PassGen Password Strength Checker",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "Check password strength, estimate crack time, and get security recommendations.",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is this password strength checker safe to use?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Yes. Your password never leaves your browser. All analysis happens locally using JavaScript, and nothing is sent to any server."}
+            },
+            {
+                "@type": "Question",
+                "name": "How is password strength calculated?",
+                "acceptedAnswer": {"@type": "Answer", "text": "We calculate entropy based on password length and character variety. Higher entropy means more possible combinations, making the password harder to crack."}
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo" aria-label="PassGen Home">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="14" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 14V10C10 6.68629 12.6863 4 16 4C19.3137 4 22 6.68629 22 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="16" cy="21" r="2" fill="currentColor"/>
+                </svg>
+                <span class="logo-text">PassGen</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="theme-icon sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="theme-icon moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="separator">/</span>
+                <span>Password Strength Checker</span>
+            </nav>
+
+            <section class="hero">
+                <h1 class="hero-title">Password Strength Checker</h1>
+                <p class="hero-subtitle">See how secure your password really is</p>
+            </section>
+
+            <!-- Password Input -->
+            <div class="password-display-card">
+                <div class="checker-input-group">
+                    <input type="password" id="passwordInput" class="checker-input" placeholder="Enter your password to check..." autocomplete="off" aria-label="Password to check">
+                    <button class="checker-toggle" id="toggleVisibility" aria-label="Show password">
+                        <svg id="eyeIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg id="eyeOffIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                            <line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Strength Meter -->
+            <div class="strength-meter">
+                <div class="strength-bar">
+                    <div class="strength-fill" id="strengthFill" data-strength="weak" style="width: 0%"></div>
+                </div>
+                <div class="strength-info">
+                    <span class="strength-label" id="strengthLabel" data-strength="weak">Enter a password</span>
+                    <span class="strength-details">
+                        <span id="strengthEntropy">0 bits</span>
+                        <span class="separator">·</span>
+                        <span id="strengthTime">--</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Analysis Results -->
+            <div class="checker-results" id="checkerResults">
+                <div class="checker-stat">
+                    <span class="checker-stat-label">Length</span>
+                    <span class="checker-stat-value" id="statLength">0 characters</span>
+                </div>
+                <div class="checker-stat">
+                    <span class="checker-stat-label">Character Types</span>
+                    <span class="checker-stat-value" id="statTypes">None</span>
+                </div>
+                <div class="checker-stat">
+                    <span class="checker-stat-label">Entropy</span>
+                    <span class="checker-stat-value" id="statEntropy">0 bits</span>
+                </div>
+                <div class="checker-stat">
+                    <span class="checker-stat-label">Estimated Crack Time</span>
+                    <span class="checker-stat-value" id="statCrackTime">--</span>
+                </div>
+
+                <!-- Warnings -->
+                <div id="warnings" class="checker-warnings"></div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-box">
+                <h3>Need a Stronger Password?</h3>
+                <p>Generate a cryptographically secure password instantly.</p>
+                <a href="/" class="btn btn-primary">Generate Strong Password</a>
+            </div>
+
+            <section class="security-notice">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+                <p><strong>100% Private:</strong> Your password is analyzed entirely in your browser. Nothing is ever sent to any server or stored anywhere.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>How Strong Is Your Password?</h2>
+                <p>Our password strength checker analyzes your password using multiple factors:</p>
+                <ul>
+                    <li><strong>Length:</strong> Longer passwords are exponentially harder to crack</li>
+                    <li><strong>Character variety:</strong> Using uppercase, lowercase, numbers, and symbols increases the possible combinations</li>
+                    <li><strong>Common patterns:</strong> We check for predictable patterns like "password123" or keyboard walks</li>
+                    <li><strong>Entropy calculation:</strong> We measure the mathematical randomness of your password</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>Understanding Password Strength</h2>
+                <table class="crack-time-table">
+                    <thead>
+                        <tr><th>Strength Level</th><th>Entropy</th><th>Estimated Crack Time*</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><span style="color: var(--color-strength-weak)">Weak</span></td><td>0-29 bits</td><td>Instant to minutes</td></tr>
+                        <tr><td><span style="color: var(--color-strength-fair)">Fair</span></td><td>30-49 bits</td><td>Hours to days</td></tr>
+                        <tr><td><span style="color: var(--color-strength-good)">Good</span></td><td>50-69 bits</td><td>Years to centuries</td></tr>
+                        <tr><td><span style="color: var(--color-strength-strong)">Strong</span></td><td>70-89 bits</td><td>Thousands of years</td></tr>
+                        <tr><td><span style="color: var(--color-strength-very-strong)">Very Strong</span></td><td>90+ bits</td><td>Longer than the universe</td></tr>
+                    </tbody>
+                </table>
+                <p><em>*Based on 10 billion guesses per second (modern GPU cluster with fast hashing)</em></p>
+            </section>
+
+            <section class="content-section">
+                <h2>How Hackers Crack Passwords</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            Brute Force
+                        </h4>
+                        <p>Trying every possible combination. Effective against short passwords but impractical for long ones.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Dictionary Attack
+                        </h4>
+                        <p>Trying common words, names, and phrases. This is why "password123" is cracked instantly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            Credential Stuffing
+                        </h4>
+                        <p>Using passwords leaked from other sites. This is why you should never reuse passwords.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Social Engineering
+                        </h4>
+                        <p>Guessing based on personal information like birthdates, pet names, or favorite teams.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="faq-section" aria-labelledby="faq-heading">
+                <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Is it safe to enter my real password here?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Yes. Your password never leaves your browser. All analysis happens locally using JavaScript. We don't have servers that receive your password, and nothing is logged or stored. You can verify this by checking your browser's network tab or reviewing our open-source code.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>How is crack time estimated?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>We assume a worst-case scenario: an offline attack using a GPU cluster capable of 10 billion guesses per second with fast hashing (like SHA-1). Real-world crack times may vary based on the hashing algorithm used and available computing power.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>What if my password shows as weak?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Use our <a href="/">password generator</a> to create a strong replacement. Make it at least 16 characters with a mix of character types. Store it in a password manager so you don't have to memorize it.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Does length or complexity matter more?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Length generally matters more. A 20-character password using only lowercase letters is stronger than an 8-character password with all character types. However, the best approach combines both length and complexity.</p></div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Related Tools -->
+            <section class="content-section">
+                <h2>More Password Tools</h2>
+                <div class="tool-links">
+                    <a href="/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Password Generator</a>
+                    <a href="/strong-password-generator/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Strong Password Generator</a>
+                    <a href="/passphrase-generator/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Passphrase Generator</a>
+                    <a href="/bulk-password-generator/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Bulk Generator</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+            <nav class="footer-links"><a href="/#privacy-section">Privacy</a><a href="https://github.com/SirDuMonster/PassGen" target="_blank" rel="noopener noreferrer">GitHub</a></nav>
+        </div>
+    </footer>
+
+    <script src="../js/strength.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+    (function() {
+        'use strict';
+        const elements = {
+            themeToggle: document.getElementById('themeToggle'),
+            passwordInput: document.getElementById('passwordInput'),
+            toggleVisibility: document.getElementById('toggleVisibility'),
+            eyeIcon: document.getElementById('eyeIcon'),
+            eyeOffIcon: document.getElementById('eyeOffIcon'),
+            strengthFill: document.getElementById('strengthFill'),
+            strengthLabel: document.getElementById('strengthLabel'),
+            strengthEntropy: document.getElementById('strengthEntropy'),
+            strengthTime: document.getElementById('strengthTime'),
+            statLength: document.getElementById('statLength'),
+            statTypes: document.getElementById('statTypes'),
+            statEntropy: document.getElementById('statEntropy'),
+            statCrackTime: document.getElementById('statCrackTime'),
+            warnings: document.getElementById('warnings')
+        };
+
+        // Common weak passwords to check against
+        const commonPasswords = ['password', '123456', '12345678', 'qwerty', 'abc123', 'monkey', 'master', 'dragon', 'letmein', 'login', 'welcome', 'admin', 'passw0rd', 'password1', 'password123', '1234567890'];
+
+        function analyzePassword(password) {
+            if (!password) {
+                return {
+                    entropy: 0,
+                    level: { name: 'Enter a password', key: 'weak' },
+                    crackTime: '--',
+                    length: 0,
+                    types: [],
+                    warnings: []
+                };
+            }
+
+            const analysis = StrengthAnalyzer.analyze(password);
+            const types = [];
+            const warnings = [];
+
+            // Detect character types
+            if (/[a-z]/.test(password)) types.push('lowercase');
+            if (/[A-Z]/.test(password)) types.push('uppercase');
+            if (/[0-9]/.test(password)) types.push('numbers');
+            if (/[^a-zA-Z0-9]/.test(password)) types.push('symbols');
+
+            // Check for common issues
+            if (password.length < 8) {
+                warnings.push('Password is too short (minimum 8 characters recommended)');
+            }
+            if (password.length < 12) {
+                warnings.push('Consider using at least 12 characters for better security');
+            }
+            if (commonPasswords.includes(password.toLowerCase())) {
+                warnings.push('This is a commonly used password - extremely easy to crack');
+            }
+            if (/^[a-z]+$/i.test(password)) {
+                warnings.push('Using only letters - add numbers and symbols for more security');
+            }
+            if (/^[0-9]+$/.test(password)) {
+                warnings.push('Using only numbers - very easy to crack via brute force');
+            }
+            if (/(.)\1{2,}/.test(password)) {
+                warnings.push('Contains repeated characters - reduces password strength');
+            }
+            if (/^(123|abc|qwerty|asdf)/i.test(password)) {
+                warnings.push('Starts with a common pattern - easy to guess');
+            }
+            if (/password/i.test(password)) {
+                warnings.push('Contains the word "password" - avoid obvious terms');
+            }
+            if (/^.{1,7}$/.test(password)) {
+                warnings.push('Passwords under 8 characters can be cracked in seconds');
+            }
+            if (types.length === 1) {
+                warnings.push('Using only one character type - mix uppercase, lowercase, numbers, and symbols');
+            }
+
+            return {
+                entropy: analysis.entropy,
+                level: analysis.level,
+                crackTime: analysis.crackTime,
+                length: password.length,
+                types: types,
+                warnings: warnings
+            };
+        }
+
+        function updateUI(analysis) {
+            // Update strength meter
+            elements.strengthFill.setAttribute('data-strength', analysis.level.key);
+            elements.strengthFill.style.width = analysis.entropy > 0 ? `${Math.min((analysis.entropy / 100) * 100, 100)}%` : '0%';
+            elements.strengthLabel.setAttribute('data-strength', analysis.level.key);
+            elements.strengthLabel.textContent = analysis.level.name;
+            elements.strengthEntropy.textContent = `${analysis.entropy} bits`;
+            elements.strengthTime.textContent = analysis.crackTime;
+
+            // Update stats
+            elements.statLength.textContent = `${analysis.length} character${analysis.length !== 1 ? 's' : ''}`;
+            elements.statTypes.textContent = analysis.types.length > 0 ? analysis.types.join(', ') : 'None';
+            elements.statEntropy.textContent = `${analysis.entropy} bits`;
+            elements.statCrackTime.textContent = analysis.crackTime;
+
+            // Update warnings
+            elements.warnings.innerHTML = '';
+            if (analysis.warnings.length > 0) {
+                analysis.warnings.forEach(warning => {
+                    const div = document.createElement('div');
+                    div.className = 'checker-warning';
+                    div.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>${warning}</span>`;
+                    elements.warnings.appendChild(div);
+                });
+            } else if (analysis.length > 0 && analysis.level.key !== 'weak' && analysis.level.key !== 'fair') {
+                const div = document.createElement('div');
+                div.className = 'checker-suggestion';
+                div.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>This is a strong password! Just make sure you don't reuse it.</span>`;
+                elements.warnings.appendChild(div);
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const isPassword = elements.passwordInput.type === 'password';
+            elements.passwordInput.type = isPassword ? 'text' : 'password';
+            elements.eyeIcon.style.display = isPassword ? 'none' : 'block';
+            elements.eyeOffIcon.style.display = isPassword ? 'block' : 'none';
+            elements.toggleVisibility.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+        }
+
+        function init() {
+            Theme.init();
+            elements.themeToggle.addEventListener('click', () => Theme.toggle());
+
+            elements.passwordInput.addEventListener('input', () => {
+                const analysis = analyzePassword(elements.passwordInput.value);
+                updateUI(analysis);
+            });
+
+            elements.toggleVisibility.addEventListener('click', togglePasswordVisibility);
+
+            // Initial state
+            updateUI(analyzePassword(''));
+        }
+
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
+    })();
+    </script>
+</body>
+</html>

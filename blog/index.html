@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Security Blog - Tips, Guides & Best Practices | PassGen</title>
+    <meta name="description" content="Learn about password security, best practices for creating strong passwords, and how to protect your online accounts. Expert guides and tips from PassGen.">
+    <meta name="keywords" content="password security blog, password tips, online security, password best practices, cybersecurity">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/blog/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Password Security Blog - Tips, Guides & Best Practices">
+    <meta property="og:description" content="Expert guides on password security, creating strong passwords, and protecting your online accounts.">
+    <meta property="og:url" content="https://passgen-liard.vercel.app/blog/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Password Security Blog | PassGen">
+    <meta name="twitter:description" content="Expert guides on password security and protecting your online accounts.">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/blog.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="16" r="1"></circle>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                PassGen
+            </a>
+            <nav class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../blog/" class="active">Blog</a>
+                <a href="../password-strength-checker/">Strength Checker</a>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="../">Home</a>
+            <span class="separator">›</span>
+            <span class="current">Blog</span>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="blog-hero">
+            <h1>Password Security Blog</h1>
+            <p class="blog-hero-subtitle">Expert guides, tips, and best practices for keeping your accounts secure</p>
+        </section>
+
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All Posts</button>
+            <button class="category-btn" data-category="guides">Guides</button>
+            <button class="category-btn" data-category="security">Security</button>
+            <button class="category-btn" data-category="tips">Tips</button>
+        </div>
+
+        <!-- Featured Post -->
+        <article class="featured-post">
+            <div class="featured-post-image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="16" r="1"></circle>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <div class="featured-post-content">
+                <span class="featured-badge">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    Featured
+                </span>
+                <h2 class="featured-post-title">
+                    <a href="how-to-create-strong-password/">How to Create a Strong Password in 2025: The Complete Guide</a>
+                </h2>
+                <p class="featured-post-excerpt">
+                    Everything you need to know about creating passwords that are both secure and practical. Learn the science behind password strength and modern best practices.
+                </p>
+                <div class="blog-card-meta">
+                    <span class="blog-card-category">Guide</span>
+                    <span>January 15, 2025</span>
+                    <span>8 min read</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Blog Grid -->
+        <div class="blog-grid">
+            <!-- Post 1 -->
+            <article class="blog-card" data-category="security">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Security</span>
+                        <span>Jan 12, 2025</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="password-manager-vs-browser/">Password Managers vs Browser Storage: Which is Safer?</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Compare the security of dedicated password managers against built-in browser password storage. Make an informed choice for your credentials.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="password-manager-vs-browser/" class="read-more">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <span class="read-time">6 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="blog-card" data-category="guides">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Guide</span>
+                        <span>Jan 10, 2025</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="wifi-password-security/">WiFi Password Security: Protecting Your Home Network</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Learn how to secure your home WiFi network with strong passwords and proper configuration to keep intruders out.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="wifi-password-security/" class="read-more">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <span class="read-time">5 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="blog-card" data-category="tips">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Tips</span>
+                        <span>Jan 8, 2025</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="common-password-mistakes/">10 Common Password Mistakes (And How to Avoid Them)</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Discover the most common password security mistakes people make and learn practical ways to fix them today.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="common-password-mistakes/" class="read-more">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <span class="read-time">7 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 4 -->
+            <article class="blog-card" data-category="security">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Security</span>
+                        <span>Jan 5, 2025</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="two-factor-authentication-guide/">Two-Factor Authentication: Your Second Line of Defense</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Why passwords alone aren't enough and how to set up two-factor authentication on your most important accounts.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="two-factor-authentication-guide/" class="read-more">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <span class="read-time">6 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 5 -->
+            <article class="blog-card" data-category="guides">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Guide</span>
+                        <span>Jan 3, 2025</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="passphrase-vs-password/">Passphrases vs Passwords: Which Should You Use?</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Understand the differences between passwords and passphrases, and learn when each type is the better choice.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="passphrase-vs-password/" class="read-more">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <span class="read-time">5 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 6 -->
+            <article class="blog-card" data-category="tips">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Tips</span>
+                        <span>Jan 1, 2025</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="how-to-share-passwords-safely/">How to Share Passwords Safely with Family</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Need to share streaming or banking passwords with family? Learn the secure ways to share credentials without compromising security.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="how-to-share-passwords-safely/" class="read-more">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <span class="read-time">4 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 7 -->
+            <article class="blog-card" data-category="security">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <path d="M9 12l2 2 4-4"></path>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Security</span>
+                        <span>Dec 30, 2024</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="why-random-passwords-are-better/">Why Random Passwords Beat Personal Ones</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Discover why passwords based on personal information are vulnerable and how true randomness protects you.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="why-random-passwords-are-better/" class="read-more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+                        <span class="read-time">5 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 8 -->
+            <article class="blog-card" data-category="security">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Security</span>
+                        <span>Dec 28, 2024</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="how-password-crackers-work/">How Password Crackers Work: Know Your Enemy</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Understanding cracking techniques helps you create better passwords. Learn about brute force, dictionaries, and more.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="how-password-crackers-work/" class="read-more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+                        <span class="read-time">8 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 9 -->
+            <article class="blog-card" data-category="guides">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <line x1="4" y1="21" x2="4" y2="14"></line>
+                        <line x1="4" y1="10" x2="4" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12" y2="3"></line>
+                        <line x1="20" y1="21" x2="20" y2="16"></line>
+                        <line x1="20" y1="12" x2="20" y2="3"></line>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Guide</span>
+                        <span>Dec 26, 2024</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="password-length-vs-complexity/">Password Length vs Complexity: What Actually Matters</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Is a longer password better than a complex one? Learn the math behind password strength.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="password-length-vs-complexity/" class="read-more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+                        <span class="read-time">6 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 10 -->
+            <article class="blog-card" data-category="guides">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Guide</span>
+                        <span>Dec 24, 2024</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="master-password-best-practices/">Creating the Perfect Master Password</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Your master password protects all others. Learn how to create one that's both strong and memorable.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="master-password-best-practices/" class="read-more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+                        <span class="read-time">7 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 11 -->
+            <article class="blog-card" data-category="tips">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Tips</span>
+                        <span>Dec 22, 2024</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="check-if-password-leaked/">How to Check If Your Password Was Leaked</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Find out if your credentials have been exposed in data breaches and what to do about it.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="check-if-password-leaked/" class="read-more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+                        <span class="read-time">5 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 12 -->
+            <article class="blog-card" data-category="security">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Security</span>
+                        <span>Dec 20, 2024</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="password-security-myths/">7 Password Security Myths Debunked</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Outdated advice that might be hurting your security. Learn what actually works.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="password-security-myths/" class="read-more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+                        <span class="read-time">7 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 13 -->
+            <article class="blog-card" data-category="security">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Security</span>
+                        <span>Dec 18, 2024</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="biometric-vs-passwords/">Biometric Authentication vs Passwords</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        Is your fingerprint more secure than a password? Compare the pros and cons of each method.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="biometric-vs-passwords/" class="read-more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+                        <span class="read-time">7 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post 14 -->
+            <article class="blog-card" data-category="guides">
+                <div class="blog-card-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span class="blog-card-category">Guide</span>
+                        <span>Dec 16, 2024</span>
+                    </div>
+                    <h3 class="blog-card-title">
+                        <a href="how-often-change-passwords/">How Often Should You Change Passwords?</a>
+                    </h3>
+                    <p class="blog-card-excerpt">
+                        The 90-day rule is dead. Learn the modern, evidence-based approach to password rotation.
+                    </p>
+                    <div class="blog-card-footer">
+                        <a href="how-often-change-passwords/" class="read-more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
+                        <span class="read-time">6 min read</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Newsletter CTA -->
+        <section class="blog-cta">
+            <h3>Stay Secure</h3>
+            <p>Use our free tools to generate strong, secure passwords for all your accounts.</p>
+            <a href="../" class="btn">Generate a Password</a>
+        </section>
+
+        <!-- Related Tools -->
+        <section class="content-section">
+            <h2>Password Tools</h2>
+            <div class="tool-links">
+                <a href="../" class="tool-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <circle cx="12" cy="16" r="1"></circle>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Password Generator</span>
+                </a>
+                <a href="../passphrase-generator/" class="tool-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Passphrase Generator</span>
+                </a>
+                <a href="../password-strength-checker/" class="tool-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <span>Strength Checker</span>
+                </a>
+                <a href="../bulk-password-generator/" class="tool-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                    </svg>
+                    <span>Bulk Generator</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>PassGen</h4>
+                <p>Free, secure password generation tools. All generation happens locally in your browser.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="../">Password Generator</a></li>
+                    <li><a href="../passphrase-generator/">Passphrase Generator</a></li>
+                    <li><a href="../username-generator/">Username Generator</a></li>
+                    <li><a href="../password-strength-checker/">Strength Checker</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="../blog/">Blog</a></li>
+                    <li><a href="../#faq">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+            <p class="security-note">All generation happens locally in your browser. No data is ever sent to any server.</p>
+        </div>
+    </footer>
+
+    <script src="../js/theme.js"></script>
+    <script>
+        // Category filter functionality
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.dataset.category;
+
+                // Filter cards
+                blogCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

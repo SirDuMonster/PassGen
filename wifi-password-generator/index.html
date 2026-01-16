@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi Password Generator - Secure WPA/WPA2 Passwords | PassGen</title>
+    <meta name="description" content="Generate strong WiFi passwords for your router. Create secure WPA/WPA2/WPA3 compatible passwords. Protect your home network with random passwords.">
+    <meta name="keywords" content="wifi password generator, random wifi password, wpa password generator, router password generator, network password generator">
+    <meta name="author" content="PassGen">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/wifi-password-generator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="WiFi Password Generator - Secure WPA/WPA2 Passwords | PassGen">
+    <meta property="og:description" content="Generate strong WiFi passwords for your router. Create secure WPA/WPA2/WPA3 compatible passwords.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://passgen-liard.vercel.app/wifi-password-generator/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="WiFi Password Generator - Secure WPA/WPA2 Passwords">
+    <meta name="twitter:description" content="Generate strong WiFi passwords for your router. Secure WPA/WPA2/WPA3 compatible.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PassGen WiFi Password Generator",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "Generate strong WiFi passwords compatible with WPA/WPA2/WPA3 security protocols.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://passgen-liard.vercel.app/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "WiFi Password Generator",
+                "item": "https://passgen-liard.vercel.app/wifi-password-generator/"
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo" aria-label="PassGen Home">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="6" y="14" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 14V10C10 6.68629 12.6863 4 16 4C19.3137 4 22 6.68629 22 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="16" cy="21" r="2" fill="currentColor"/>
+                </svg>
+                <span class="logo-text">PassGen</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                <svg class="theme-icon sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="theme-icon moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="separator">/</span>
+                <span>WiFi Password Generator</span>
+            </nav>
+
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="hero-title">WiFi Password Generator</h1>
+                <p class="hero-subtitle">Create secure WPA/WPA2/WPA3 compatible passwords</p>
+            </section>
+
+            <!-- Password Display -->
+            <div class="password-display-card">
+                <div class="password-output" id="passwordOutput" aria-live="polite" aria-label="Generated WiFi password">
+                    <span class="password-text" id="passwordText">Click generate to create a password</span>
+                </div>
+                <div class="password-actions">
+                    <button class="btn btn-primary" id="copyBtn" aria-label="Copy password to clipboard">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                        <span>Copy</span>
+                    </button>
+                    <button class="btn btn-secondary" id="regenerateBtn" aria-label="Generate new password">
+                        <svg class="regenerate-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 4 23 10 17 10"/>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                        </svg>
+                        <span>Regenerate</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Strength Meter -->
+            <div class="strength-meter" id="strengthMeter">
+                <div class="strength-bar">
+                    <div class="strength-fill" id="strengthFill"></div>
+                </div>
+                <div class="strength-info">
+                    <span class="strength-label" id="strengthLabel">--</span>
+                    <span class="strength-details">
+                        <span id="strengthEntropy">0 bits</span>
+                        <span class="separator">·</span>
+                        <span id="strengthTime">--</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password Options -->
+            <div class="options-card">
+                <!-- Length Slider - WPA requires 8-63 chars -->
+                <div class="option-group length-group">
+                    <label for="passwordLength" class="option-label">Length (WPA: 8-63 characters)</label>
+                    <div class="length-controls">
+                        <input type="range" id="passwordLength" class="length-slider" min="8" max="63" value="16" aria-label="Password length">
+                        <input type="number" id="passwordLengthInput" class="length-input" min="8" max="63" value="16" aria-label="Password length value">
+                    </div>
+                </div>
+
+                <!-- Character Options -->
+                <div class="option-group checkboxes-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="uppercase" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Uppercase (A-Z)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="lowercase" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Lowercase (a-z)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="numbers" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Numbers (0-9)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="symbols">
+                        <span class="checkbox-custom"></span>
+                        <span>Symbols (!@#$%...)</span>
+                    </label>
+                </div>
+
+                <!-- WiFi-specific options -->
+                <div class="option-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="easyToType" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Easy to type (exclude similar: 0O1lI)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Security Notice -->
+            <section class="security-notice">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                    <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                    <line x1="12" y1="20" x2="12.01" y2="20"/>
+                </svg>
+                <p><strong>Secure Your Network:</strong> A strong WiFi password prevents unauthorized access to your network and protects all connected devices.</p>
+            </section>
+
+            <!-- Content Section -->
+            <section class="content-section">
+                <h2>Secure Your WiFi Network</h2>
+                <p>Your WiFi password is the key to your home network. Using the default password that came with your router is risky - these passwords are often printed on the router itself, can be looked up online, or may follow predictable patterns.</p>
+
+                <p>A secure WiFi password should:</p>
+                <ul>
+                    <li><strong>Be at least 12-16 characters</strong> (longer is more secure)</li>
+                    <li><strong>Mix character types</strong> for higher entropy</li>
+                    <li><strong>Be completely random</strong> - no words, names, or dates</li>
+                    <li><strong>Be unique</strong> - don't reuse passwords from other services</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>WPA Password Requirements</h2>
+                <p>WiFi Protected Access (WPA/WPA2/WPA3) has specific password requirements:</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Length
+                        </h4>
+                        <p>WPA requires 8-63 characters. We recommend at least 16 characters for optimal security.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                            Characters
+                        </h4>
+                        <p>All printable ASCII characters are allowed (letters, numbers, symbols, and spaces).</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            Recommended
+                        </h4>
+                        <p>16+ characters with mixed case, numbers, and at least one symbol for best security.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                            Easy Typing
+                        </h4>
+                        <p>Exclude similar characters (0/O, 1/l/I) for easier entry on smart TVs and game consoles.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>How to Change Your WiFi Password</h2>
+                <p>Follow these general steps to update your router's WiFi password:</p>
+
+                <ol>
+                    <li><strong>Access your router admin panel:</strong> Open a browser and go to your router's IP address (usually 192.168.1.1 or 192.168.0.1)</li>
+                    <li><strong>Log in:</strong> Use your admin credentials (often printed on the router if you haven't changed them)</li>
+                    <li><strong>Find wireless settings:</strong> Look for "Wireless", "WiFi", or "WLAN" in the menu</li>
+                    <li><strong>Update the password:</strong> Enter your new secure password and save</li>
+                    <li><strong>Reconnect your devices:</strong> All devices will need to reconnect with the new password</li>
+                </ol>
+
+                <p><em>Tip: Write down the new password and store it securely before changing. You'll need it to reconnect your devices.</em></p>
+            </section>
+
+            <!-- CTA Box -->
+            <div class="cta-box">
+                <h3>Need an Even Stronger Password?</h3>
+                <p>For maximum security, try our strong password generator with up to 128 characters.</p>
+                <a href="/strong-password-generator/" class="btn btn-primary">Strong Password Generator</a>
+            </div>
+
+            <!-- FAQ Section -->
+            <section class="faq-section" aria-labelledby="faq-heading">
+                <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>What's the best length for a WiFi password?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>We recommend at least 16 characters. While WPA allows 8-63 characters, longer passwords are exponentially more secure. A 16-character password with mixed character types is effectively uncrackable with current technology.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Should I use symbols in my WiFi password?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Symbols add security but can be harder to type on some devices like smart TVs, game consoles, or IoT devices. If you have many devices with limited keyboards, you might prefer a longer password without symbols. With symbols, you can use a shorter password for equivalent security.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>How often should I change my WiFi password?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>If you have a strong, unique password, you don't need to change it regularly. However, you should change it if: you suspect unauthorized access, you've shared it with guests, someone who knew it no longer should have access, or you've used the same password for a long time (years).</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>What's the difference between WPA2 and WPA3?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>WPA3 is the newer, more secure standard that provides stronger encryption and better protection against brute-force attacks. Both use the same password format (8-63 characters), so passwords generated here work with both. If your router supports WPA3, enable it for better security.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Can I use spaces in my WiFi password?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Yes, spaces are allowed in WPA passwords. However, some older devices or routers may have issues with spaces. For maximum compatibility, stick to letters, numbers, and common symbols.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Related Tools -->
+            <section class="content-section">
+                <h2>More Password Tools</h2>
+                <div class="tool-links">
+                    <a href="/" class="tool-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        Password Generator
+                    </a>
+                    <a href="/strong-password-generator/" class="tool-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Strong Password Generator
+                    </a>
+                    <a href="/passphrase-generator/" class="tool-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        Passphrase Generator
+                    </a>
+                    <a href="/password-strength-checker/" class="tool-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Strength Checker
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="alert" aria-live="assertive">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        <span id="toastMessage">Copied!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="/#privacy-section">Privacy</a>
+                <a href="https://github.com/SirDuMonster/PassGen" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/generator.js"></script>
+    <script src="../js/strength.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+    (function() {
+        'use strict';
+
+        const elements = {
+            themeToggle: document.getElementById('themeToggle'),
+            passwordText: document.getElementById('passwordText'),
+            copyBtn: document.getElementById('copyBtn'),
+            regenerateBtn: document.getElementById('regenerateBtn'),
+            passwordLength: document.getElementById('passwordLength'),
+            passwordLengthInput: document.getElementById('passwordLengthInput'),
+            uppercase: document.getElementById('uppercase'),
+            lowercase: document.getElementById('lowercase'),
+            numbers: document.getElementById('numbers'),
+            symbols: document.getElementById('symbols'),
+            easyToType: document.getElementById('easyToType'),
+            strengthFill: document.getElementById('strengthFill'),
+            strengthLabel: document.getElementById('strengthLabel'),
+            strengthEntropy: document.getElementById('strengthEntropy'),
+            strengthTime: document.getElementById('strengthTime'),
+            toast: document.getElementById('toast'),
+            toastMessage: document.getElementById('toastMessage')
+        };
+
+        let toastTimeout = null;
+
+        function showToast(message = 'Copied!') {
+            if (toastTimeout) clearTimeout(toastTimeout);
+            elements.toastMessage.textContent = message;
+            elements.toast.classList.add('show');
+            toastTimeout = setTimeout(() => elements.toast.classList.remove('show'), 2000);
+        }
+
+        function showCopySuccess(button) {
+            if (!button) return;
+            button.classList.add('copied');
+            const span = button.querySelector('span');
+            const originalText = span ? span.textContent : 'Copy';
+            if (span) span.textContent = 'Copied!';
+            setTimeout(() => {
+                button.classList.remove('copied');
+                if (span) span.textContent = originalText;
+            }, 1500);
+        }
+
+        async function copyToClipboard(text, button = null) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Copied!');
+                showCopySuccess(button);
+            } catch (err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('Copied!');
+                    showCopySuccess(button);
+                } catch (e) {
+                    showToast('Failed to copy');
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function getPasswordOptions() {
+            return {
+                length: parseInt(elements.passwordLength.value, 10),
+                uppercase: elements.uppercase.checked,
+                lowercase: elements.lowercase.checked,
+                numbers: elements.numbers.checked,
+                symbols: elements.symbols.checked,
+                excludeAmbiguous: elements.easyToType.checked,
+                excludeBrackets: false,
+                beginWithLetter: false,
+                noRepeating: false,
+                minNumbers: 0,
+                minSymbols: 0,
+                customSymbols: null
+            };
+        }
+
+        function updateStrengthMeter(analysis) {
+            elements.strengthFill.setAttribute('data-strength', analysis.level.key);
+            elements.strengthLabel.setAttribute('data-strength', analysis.level.key);
+            elements.strengthLabel.textContent = analysis.level.name;
+            elements.strengthEntropy.textContent = `${analysis.entropy} bits`;
+            elements.strengthTime.textContent = analysis.crackTime;
+        }
+
+        function generatePassword() {
+            const options = getPasswordOptions();
+            if (!options.uppercase && !options.lowercase && !options.numbers && !options.symbols) {
+                options.lowercase = true;
+                elements.lowercase.checked = true;
+            }
+            const password = Generator.generatePassword(options);
+            elements.passwordText.textContent = password;
+            elements.regenerateBtn.querySelector('.regenerate-icon').style.transform = 'rotate(360deg)';
+            setTimeout(() => elements.regenerateBtn.querySelector('.regenerate-icon').style.transform = '', 300);
+            const analysis = StrengthAnalyzer.analyze(password);
+            updateStrengthMeter(analysis);
+        }
+
+        function syncSliderInput(slider, input, callback) {
+            slider.addEventListener('input', () => {
+                input.value = slider.value;
+                callback();
+            });
+            input.addEventListener('input', () => {
+                let value = parseInt(input.value, 10);
+                const min = parseInt(input.min, 10);
+                const max = parseInt(input.max, 10);
+                if (isNaN(value)) value = min;
+                if (value < min) value = min;
+                if (value > max) value = max;
+                input.value = value;
+                slider.value = value;
+                callback();
+            });
+        }
+
+        function init() {
+            Theme.init();
+            elements.themeToggle.addEventListener('click', () => Theme.toggle());
+            elements.copyBtn.addEventListener('click', () => {
+                const text = elements.passwordText.textContent;
+                if (text && !text.includes('Click generate')) {
+                    copyToClipboard(text, elements.copyBtn);
+                }
+            });
+            elements.regenerateBtn.addEventListener('click', generatePassword);
+            syncSliderInput(elements.passwordLength, elements.passwordLengthInput, generatePassword);
+            [elements.uppercase, elements.lowercase, elements.numbers, elements.symbols, elements.easyToType].forEach(cb => {
+                cb.addEventListener('change', generatePassword);
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'g') {
+                    e.preventDefault();
+                    generatePassword();
+                }
+                if ((e.ctrlKey || e.metaKey) && e.key === 'c' && !e.target.matches('input, textarea')) {
+                    const text = elements.passwordText.textContent;
+                    if (text && !text.includes('Click generate')) {
+                        copyToClipboard(text);
+                    }
+                }
+            });
+
+            generatePassword();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
+</body>
+</html>

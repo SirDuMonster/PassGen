@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Password Generator - Generate Multiple Passwords at Once | PassGen</title>
+    <meta name="description" content="Generate multiple secure passwords simultaneously. Create 10, 50, or 100+ unique passwords for teams, accounts, or testing. Export as CSV or TXT.">
+    <meta name="keywords" content="bulk password generator, multiple password generator, batch password generator, mass password generator, generate multiple passwords">
+    <meta name="author" content="PassGen">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/bulk-password-generator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bulk Password Generator - Multiple Passwords at Once | PassGen">
+    <meta property="og:description" content="Generate multiple secure passwords simultaneously. Export as CSV or TXT.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://passgen-liard.vercel.app/bulk-password-generator/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Bulk Password Generator">
+    <meta name="twitter:description" content="Generate multiple secure passwords at once.">
+
+    <!-- Favicon & Fonts -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PassGen Bulk Password Generator",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "Generate multiple secure passwords at once for teams, testing, or batch account setup.",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo" aria-label="PassGen Home">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="14" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 14V10C10 6.68629 12.6863 4 16 4C19.3137 4 22 6.68629 22 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="16" cy="21" r="2" fill="currentColor"/>
+                </svg>
+                <span class="logo-text">PassGen</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="theme-icon sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="theme-icon moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="separator">/</span>
+                <span>Bulk Password Generator</span>
+            </nav>
+
+            <section class="hero">
+                <h1 class="hero-title">Bulk Password Generator</h1>
+                <p class="hero-subtitle">Generate multiple secure passwords at once</p>
+            </section>
+
+            <!-- Controls -->
+            <div class="options-card bulk-controls">
+                <div class="option-group length-group">
+                    <label for="bulkCount" class="option-label">Number of Passwords</label>
+                    <div class="length-controls">
+                        <input type="range" id="bulkCount" class="length-slider" min="1" max="100" value="10" aria-label="Number of passwords">
+                        <input type="number" id="bulkCountInput" class="length-input" min="1" max="100" value="10" aria-label="Number of passwords value">
+                    </div>
+                </div>
+
+                <div class="option-group length-group">
+                    <label for="passwordLength" class="option-label">Password Length</label>
+                    <div class="length-controls">
+                        <input type="range" id="passwordLength" class="length-slider" min="8" max="64" value="16" aria-label="Password length">
+                        <input type="number" id="passwordLengthInput" class="length-input" min="8" max="64" value="16" aria-label="Password length value">
+                    </div>
+                </div>
+
+                <div class="option-group checkboxes-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="uppercase" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Uppercase (A-Z)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="lowercase" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Lowercase (a-z)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="numbers" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Numbers (0-9)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="symbols" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Symbols (!@#$%...)</span>
+                    </label>
+                </div>
+
+                <div class="bulk-actions">
+                    <button class="btn btn-primary" id="generateBulkBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <span>Generate</span>
+                    </button>
+                    <button class="btn btn-secondary" id="copyAllBtn" disabled>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span>Copy All</span>
+                    </button>
+                    <button class="btn btn-secondary" id="downloadCsvBtn" disabled>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Download CSV</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Password List -->
+            <div class="bulk-list-container">
+                <ul class="bulk-list" id="bulkList" aria-label="Generated passwords list">
+                    <li class="bulk-placeholder">Generated passwords will appear here</li>
+                </ul>
+            </div>
+
+            <section class="security-notice">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+                <p><strong>Batch Security:</strong> All passwords are generated locally. Nothing is stored or transmitted. Click any password to copy it individually.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Generate Multiple Passwords at Once</h2>
+                <p>Need to create many passwords quickly? Our bulk password generator creates multiple unique, secure passwords simultaneously. Perfect for:</p>
+                <ul>
+                    <li><strong>IT Administrators:</strong> Setting up employee accounts or resetting passwords</li>
+                    <li><strong>Team Onboarding:</strong> Creating initial passwords for new team members</li>
+                    <li><strong>Testing & Development:</strong> Generating test data for security applications</li>
+                    <li><strong>Database Seeding:</strong> Populating databases with realistic password data</li>
+                    <li><strong>Account Migration:</strong> Creating new passwords when switching services</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>Bulk Password Best Practices</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Store Securely
+                        </h4>
+                        <p>Import passwords into a password manager immediately. Never leave them in plain text files.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            Never Email Plain Text
+                        </h4>
+                        <p>Don't send passwords via email. Use secure channels or password managers with sharing features.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            Document Assignment
+                        </h4>
+                        <p>Keep a secure record of which password was assigned to which account or user.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                            Force Password Change
+                        </h4>
+                        <p>When distributing initial passwords, require users to change them on first login.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="cta-box">
+                <h3>Need Just One Password?</h3>
+                <p>Use our standard password generator for individual passwords with more customization options.</p>
+                <a href="/" class="btn btn-primary">Password Generator</a>
+            </div>
+
+            <!-- FAQ -->
+            <section class="faq-section" aria-labelledby="faq-heading">
+                <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Are the bulk passwords unique?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Yes. Each password is generated independently using cryptographically secure randomness. With the massive number of possible combinations, the chance of duplicates is astronomically low.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>What's in the CSV download?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>The CSV file contains a numbered list of passwords that can be opened in any spreadsheet application. You can add your own columns for usernames, accounts, or notes.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Is there a limit to how many I can generate?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>The interface allows up to 100 passwords at once. For larger batches, you can generate multiple times. Since everything runs locally, there's no server limit.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Can I click individual passwords to copy?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Yes! Click any password in the list to copy just that one to your clipboard. You'll see a confirmation toast when copied.</p></div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Related Tools -->
+            <section class="content-section">
+                <h2>More Password Tools</h2>
+                <div class="tool-links">
+                    <a href="/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Password Generator</a>
+                    <a href="/strong-password-generator/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Strong Password Generator</a>
+                    <a href="/password-strength-checker/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Strength Checker</a>
+                    <a href="/pin-generator/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>PIN Generator</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="toast" id="toast" role="alert" aria-live="assertive">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="toastMessage">Copied!</span>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+            <nav class="footer-links"><a href="/#privacy-section">Privacy</a><a href="https://github.com/SirDuMonster/PassGen" target="_blank" rel="noopener noreferrer">GitHub</a></nav>
+        </div>
+    </footer>
+
+    <script src="../js/generator.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+    (function() {
+        'use strict';
+        const elements = {
+            themeToggle: document.getElementById('themeToggle'),
+            bulkCount: document.getElementById('bulkCount'),
+            bulkCountInput: document.getElementById('bulkCountInput'),
+            passwordLength: document.getElementById('passwordLength'),
+            passwordLengthInput: document.getElementById('passwordLengthInput'),
+            uppercase: document.getElementById('uppercase'),
+            lowercase: document.getElementById('lowercase'),
+            numbers: document.getElementById('numbers'),
+            symbols: document.getElementById('symbols'),
+            generateBulkBtn: document.getElementById('generateBulkBtn'),
+            copyAllBtn: document.getElementById('copyAllBtn'),
+            downloadCsvBtn: document.getElementById('downloadCsvBtn'),
+            bulkList: document.getElementById('bulkList'),
+            toast: document.getElementById('toast'),
+            toastMessage: document.getElementById('toastMessage')
+        };
+
+        let bulkPasswords = [];
+        let toastTimeout = null;
+
+        function showToast(message = 'Copied!') {
+            if (toastTimeout) clearTimeout(toastTimeout);
+            elements.toastMessage.textContent = message;
+            elements.toast.classList.add('show');
+            toastTimeout = setTimeout(() => elements.toast.classList.remove('show'), 2000);
+        }
+
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Copied!');
+            } catch (err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast('Copied!'); } catch (e) { showToast('Failed to copy'); }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function getPasswordOptions() {
+            return {
+                length: parseInt(elements.passwordLength.value, 10),
+                uppercase: elements.uppercase.checked,
+                lowercase: elements.lowercase.checked,
+                numbers: elements.numbers.checked,
+                symbols: elements.symbols.checked,
+                excludeAmbiguous: false,
+                excludeBrackets: false,
+                beginWithLetter: false,
+                noRepeating: false,
+                minNumbers: 0,
+                minSymbols: 0,
+                customSymbols: null
+            };
+        }
+
+        function generateBulk() {
+            const count = parseInt(elements.bulkCount.value, 10);
+            const options = getPasswordOptions();
+
+            // Ensure at least one type
+            if (!options.uppercase && !options.lowercase && !options.numbers && !options.symbols) {
+                options.lowercase = true;
+                elements.lowercase.checked = true;
+            }
+
+            bulkPasswords = Generator.generateBulk(count, options);
+
+            elements.bulkList.innerHTML = '';
+            bulkPasswords.forEach((pwd, index) => {
+                const li = document.createElement('li');
+                li.textContent = pwd;
+                li.setAttribute('data-index', index);
+                li.addEventListener('click', () => copyToClipboard(pwd));
+                li.style.cursor = 'pointer';
+                li.title = 'Click to copy';
+                elements.bulkList.appendChild(li);
+            });
+
+            elements.copyAllBtn.disabled = false;
+            elements.downloadCsvBtn.disabled = false;
+            showToast(`Generated ${count} passwords`);
+        }
+
+        function copyAllBulk() {
+            if (bulkPasswords.length > 0) {
+                copyToClipboard(bulkPasswords.join('\n'));
+            }
+        }
+
+        function downloadCSV() {
+            if (bulkPasswords.length > 0) {
+                Generator.downloadCSV(bulkPasswords);
+                showToast('Downloaded CSV');
+            }
+        }
+
+        function syncSliderInput(slider, input, callback) {
+            slider.addEventListener('input', () => { input.value = slider.value; if (callback) callback(); });
+            input.addEventListener('input', () => {
+                let value = parseInt(input.value, 10);
+                const min = parseInt(input.min, 10), max = parseInt(input.max, 10);
+                if (isNaN(value)) value = min;
+                if (value < min) value = min;
+                if (value > max) value = max;
+                input.value = value;
+                slider.value = value;
+                if (callback) callback();
+            });
+        }
+
+        function init() {
+            Theme.init();
+            elements.themeToggle.addEventListener('click', () => Theme.toggle());
+            elements.generateBulkBtn.addEventListener('click', generateBulk);
+            elements.copyAllBtn.addEventListener('click', copyAllBulk);
+            elements.downloadCsvBtn.addEventListener('click', downloadCSV);
+            syncSliderInput(elements.bulkCount, elements.bulkCountInput);
+            syncSliderInput(elements.passwordLength, elements.passwordLengthInput);
+        }
+
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorable Password Generator - Easy to Remember, Hard to Crack | PassGen</title>
+    <meta name="description" content="Generate strong, memorable passwords that are easy to remember but hard to crack. Create secure passwords using word patterns, letter substitutions, and mnemonic techniques.">
+    <meta name="keywords" content="memorable password, easy to remember password, password generator, secure password, mnemonic password">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/memorable-password-generator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Memorable Password Generator - Easy to Remember, Hard to Crack">
+    <meta property="og:description" content="Generate strong passwords that are easy to remember using word patterns and mnemonic techniques.">
+    <meta property="og:url" content="https://passgen-liard.vercel.app/memorable-password-generator/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Memorable Password Generator | PassGen">
+    <meta name="twitter:description" content="Create strong, memorable passwords using word patterns and mnemonic techniques.">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PassGen Memorable Password Generator",
+        "description": "Generate strong, memorable passwords that are easy to remember but hard to crack",
+        "url": "https://passgen-liard.vercel.app/memorable-password-generator/",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "permissions": "none",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="16" r="1"></circle>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                PassGen
+            </a>
+            <nav class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#faq">FAQ</a>
+                <a href="../password-strength-checker/">Strength Checker</a>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="../">Home</a>
+            <span class="separator">›</span>
+            <span class="current">Memorable Password Generator</span>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Memorable Password Generator</h1>
+            <p class="hero-subtitle">Create strong passwords that are easy to remember but hard to crack</p>
+        </section>
+
+        <!-- Generator Tool -->
+        <section class="generator-card">
+            <div class="password-display-wrapper">
+                <div class="password-display" id="passwordDisplay">
+                    <span class="password-text" id="passwordText">Click generate to create a password</span>
+                    <button class="copy-btn" id="copyBtn" title="Copy to clipboard">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="password-hint" id="passwordHint"></div>
+            </div>
+
+            <!-- Strength Meter -->
+            <div class="strength-meter">
+                <div class="strength-bar">
+                    <div class="strength-fill" id="strengthFill"></div>
+                </div>
+                <div class="strength-info">
+                    <span class="strength-label" id="strengthLabel">Generate a password</span>
+                    <span class="strength-details" id="strengthDetails"></span>
+                </div>
+            </div>
+
+            <div class="memorable-controls">
+                <div class="control-group">
+                    <label class="control-label">Password Style</label>
+                    <div class="style-selector">
+                        <label class="style-option">
+                            <input type="radio" name="memorableStyle" value="wordBased" checked>
+                            <span class="style-card">
+                                <span class="style-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                    </svg>
+                                </span>
+                                <span class="style-name">Word-Based</span>
+                                <span class="style-example">Tiger$Rain42</span>
+                            </span>
+                        </label>
+                        <label class="style-option">
+                            <input type="radio" name="memorableStyle" value="phrase">
+                            <span class="style-card">
+                                <span class="style-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="17" y1="10" x2="3" y2="10"></line>
+                                        <line x1="21" y1="6" x2="3" y2="6"></line>
+                                        <line x1="21" y1="14" x2="3" y2="14"></line>
+                                        <line x1="17" y1="18" x2="3" y2="18"></line>
+                                    </svg>
+                                </span>
+                                <span class="style-name">Phrase Pattern</span>
+                                <span class="style-example">2Dogs&amp;3Cats!</span>
+                            </span>
+                        </label>
+                        <label class="style-option">
+                            <input type="radio" name="memorableStyle" value="leetspeak">
+                            <span class="style-card">
+                                <span class="style-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="4 17 10 11 4 5"></polyline>
+                                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                                    </svg>
+                                </span>
+                                <span class="style-name">Leetspeak</span>
+                                <span class="style-example">P@ssw0rd!23</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="styleOptions" class="style-options">
+                    <!-- Dynamic options based on style -->
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="generateBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M23 4v6h-6M1 20v-6h6"></path>
+                        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"></path>
+                    </svg>
+                    Generate Password
+                </button>
+            </div>
+        </section>
+
+        <!-- Content Sections -->
+        <section class="content-section">
+            <h2>Why Choose Memorable Passwords?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3>Easy to Remember</h3>
+                    <p>Passwords based on words and patterns are easier to recall than random character strings.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Still Secure</h3>
+                    <p>Special characters, numbers, and mixed case ensure strong protection against attacks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                    </div>
+                    <h3>No Manager Needed</h3>
+                    <p>Perfect for accounts where you can't use a password manager, like your master password.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3>Easy to Type</h3>
+                    <p>Word-based passwords are faster to type on mobile devices and foreign keyboards.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Memorization Techniques</h2>
+            <div class="techniques-grid">
+                <div class="technique-card">
+                    <h3>Create a Story</h3>
+                    <p>Turn your password into a mini-story. "Tiger$Rain42" becomes "A tiger sheltered from the rain on the 42nd day."</p>
+                </div>
+                <div class="technique-card">
+                    <h3>Use Visualization</h3>
+                    <p>Picture the words in your password. Vivid mental images are easier to recall than abstract characters.</p>
+                </div>
+                <div class="technique-card">
+                    <h3>Practice Typing</h3>
+                    <p>Type your new password 5-10 times when you first create it. Muscle memory helps retention.</p>
+                </div>
+                <div class="technique-card">
+                    <h3>Personal Associations</h3>
+                    <p>Connect the generated words to something meaningful to you (but not guessable by others).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Security vs. Memorability</h2>
+            <div class="comparison-visual">
+                <div class="comparison-item">
+                    <div class="comparison-header weak">Weak & Easy</div>
+                    <div class="comparison-example">password123</div>
+                    <p>Common word + sequential numbers. Cracked instantly.</p>
+                </div>
+                <div class="comparison-item">
+                    <div class="comparison-header balanced">Balanced</div>
+                    <div class="comparison-example">Tiger$Rain42</div>
+                    <p>Random words + symbol + numbers. Strong yet memorable.</p>
+                </div>
+                <div class="comparison-item">
+                    <div class="comparison-header strong">Strong & Complex</div>
+                    <div class="comparison-example">7#kL9$mP2@xQ</div>
+                    <p>Maximum security but nearly impossible to memorize.</p>
+                </div>
+            </div>
+            <p class="comparison-note">Our memorable passwords aim for the balanced sweet spot—strong enough to resist attacks while still being practical to remember and type.</p>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="content-section" id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>Are memorable passwords as secure as random passwords?</summary>
+                    <p>When properly constructed with sufficient length, mixed case, numbers, and special characters, memorable passwords can achieve similar entropy levels to random passwords. A 14+ character memorable password with varied character types is highly secure.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>When should I use a memorable password vs. a password manager?</summary>
+                    <p>Use memorable passwords for: your password manager's master password, device login passwords, and accounts you access frequently without your manager. Use your password manager for everything else.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What makes a password "memorable" vs just "easy"?</summary>
+                    <p>Easy passwords like "password123" are guessable. Memorable passwords use random word combinations with complexity added—they're easy for you to remember but impossible for attackers to guess because the words are randomly selected.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How does leetspeak improve security?</summary>
+                    <p>Leetspeak substitutions (like @ for a, 0 for o) add character variety, but modern crackers know these patterns. Our generator combines leetspeak with truly random elements for better security than simple substitutions alone.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I modify the generated password?</summary>
+                    <p>Yes! Feel free to swap words, change numbers, or add your own elements. Just ensure you maintain the password's length and character variety for security.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Are memorable passwords as secure as random passwords?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "When properly constructed with sufficient length, mixed case, numbers, and special characters, memorable passwords can achieve similar entropy levels to random passwords. A 14+ character memorable password with varied character types is highly secure."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "When should I use a memorable password vs. a password manager?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Use memorable passwords for: your password manager's master password, device login passwords, and accounts you access frequently without your manager. Use your password manager for everything else."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What makes a password \"memorable\" vs just \"easy\"?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Easy passwords like \"password123\" are guessable. Memorable passwords use random word combinations with complexity added—they're easy for you to remember but impossible for attackers to guess because the words are randomly selected."
+                    }
+                }
+            ]
+        }
+        </script>
+
+        <!-- Related Tools -->
+        <section class="content-section">
+            <h2>Related Tools</h2>
+            <div class="tool-links">
+                <a href="../" class="tool-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <circle cx="12" cy="16" r="1"></circle>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Password Generator</span>
+                </a>
+                <a href="../passphrase-generator/" class="tool-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>Passphrase Generator</span>
+                </a>
+                <a href="../strong-password-generator/" class="tool-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <span>Strong Password Generator</span>
+                </a>
+                <a href="../password-strength-checker/" class="tool-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <span>Password Strength Checker</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>PassGen</h4>
+                <p>Free, secure password generation tools. All generation happens locally in your browser.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="../">Password Generator</a></li>
+                    <li><a href="../passphrase-generator/">Passphrase Generator</a></li>
+                    <li><a href="../memorable-password-generator/">Memorable Passwords</a></li>
+                    <li><a href="../password-strength-checker/">Strength Checker</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="../#faq">FAQ</a></li>
+                    <li><a href="../#features">Features</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+            <p class="security-note">All generation happens locally in your browser. No data is ever sent to any server.</p>
+        </div>
+    </footer>
+
+    <script src="../js/theme.js"></script>
+    <script src="../js/strength.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            // Word lists for memorable passwords
+            const adjectives = [
+                'Swift', 'Bold', 'Calm', 'Dark', 'Epic', 'Fast', 'Gold', 'High', 'Iron', 'Jade',
+                'Keen', 'Loud', 'Mild', 'Neat', 'Pale', 'Pure', 'Rare', 'Safe', 'Tall', 'True',
+                'Blue', 'Brave', 'Bright', 'Cool', 'Deep', 'Fair', 'Fresh', 'Grand', 'Green', 'Happy',
+                'Hot', 'Kind', 'Light', 'Lucky', 'Noble', 'Quick', 'Red', 'Rich', 'Sharp', 'Silver',
+                'Smart', 'Soft', 'Strong', 'Sweet', 'Warm', 'White', 'Wild', 'Wise', 'Young', 'Zero'
+            ];
+
+            const nouns = [
+                'Tiger', 'Eagle', 'Storm', 'River', 'Stone', 'Cloud', 'Flame', 'Frost', 'Light', 'Night',
+                'Moon', 'Star', 'Sun', 'Wave', 'Wind', 'Wolf', 'Bear', 'Deer', 'Fox', 'Hawk',
+                'Lion', 'Oak', 'Pine', 'Rose', 'Lake', 'Peak', 'Rain', 'Snow', 'Fire', 'Ice',
+                'Bird', 'Fish', 'Tree', 'Rock', 'Sand', 'Sky', 'Sea', 'Hill', 'Vale', 'Glen',
+                'Brook', 'Leaf', 'Moss', 'Fern', 'Sage', 'Mint', 'Lily', 'Iris', 'Ruby', 'Jade'
+            ];
+
+            const verbs = [
+                'Runs', 'Jump', 'Fly', 'Swim', 'Walk', 'Dance', 'Sing', 'Play', 'Read', 'Write',
+                'Think', 'Dream', 'Hope', 'Love', 'Live', 'Grow', 'Move', 'Rise', 'Fall', 'Flow'
+            ];
+
+            const symbols = ['!', '@', '#', '$', '%', '&', '*', '+', '=', '?'];
+            const separators = ['_', '-', '.', '$', '#', '@', '!', '&'];
+
+            const leetMap = {
+                'a': ['@', '4'], 'e': ['3'], 'i': ['1', '!'], 'o': ['0'],
+                's': ['$', '5'], 't': ['7'], 'l': ['1'], 'b': ['8']
+            };
+
+            // DOM Elements
+            const passwordText = document.getElementById('passwordText');
+            const passwordHint = document.getElementById('passwordHint');
+            const copyBtn = document.getElementById('copyBtn');
+            const generateBtn = document.getElementById('generateBtn');
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthLabel = document.getElementById('strengthLabel');
+            const strengthDetails = document.getElementById('strengthDetails');
+            const styleOptions = document.getElementById('styleOptions');
+            const styleRadios = document.querySelectorAll('input[name="memorableStyle"]');
+
+            let currentStyle = 'wordBased';
+
+            // Cryptographically secure random
+            function getSecureRandomInt(max) {
+                if (max <= 0) return 0;
+                const array = new Uint32Array(1);
+                const maxUint32 = 0xFFFFFFFF;
+                const limit = maxUint32 - (maxUint32 % max);
+                do {
+                    crypto.getRandomValues(array);
+                } while (array[0] >= limit);
+                return array[0] % max;
+            }
+
+            function randomItem(array) {
+                return array[getSecureRandomInt(array.length)];
+            }
+
+            function randomNumber(min, max) {
+                return min + getSecureRandomInt(max - min + 1);
+            }
+
+            // Style-specific options
+            const styleOptionsConfig = {
+                wordBased: `
+                    <div class="option-row">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="optCapitalize" checked>
+                            <span>Capitalize words</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="optIncludeSymbol" checked>
+                            <span>Include symbol</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="optIncludeNumber" checked>
+                            <span>Include number</span>
+                        </label>
+                    </div>
+                `,
+                phrase: `
+                    <div class="option-row">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="optIncludeVerb">
+                            <span>Include action word</span>
+                        </label>
+                    </div>
+                `,
+                leetspeak: `
+                    <div class="option-row">
+                        <div class="slider-control">
+                            <label>Substitution level: <span id="leetLevelValue">Medium</span></label>
+                            <input type="range" id="optLeetLevel" min="1" max="3" value="2">
+                        </div>
+                    </div>
+                `
+            };
+
+            // Generate word-based password (e.g., Tiger$Rain42)
+            function generateWordBased() {
+                const capitalize = document.getElementById('optCapitalize')?.checked ?? true;
+                const includeSymbol = document.getElementById('optIncludeSymbol')?.checked ?? true;
+                const includeNumber = document.getElementById('optIncludeNumber')?.checked ?? true;
+
+                let word1 = randomItem(adjectives);
+                let word2 = randomItem(nouns);
+
+                if (!capitalize) {
+                    word1 = word1.toLowerCase();
+                    word2 = word2.toLowerCase();
+                }
+
+                let password = word1;
+
+                if (includeSymbol) {
+                    password += randomItem(symbols);
+                }
+
+                password += word2;
+
+                if (includeNumber) {
+                    password += randomNumber(10, 99);
+                }
+
+                const hint = `Remember: "${word1}" + "${word2}" with a symbol and number`;
+                return { password, hint };
+            }
+
+            // Generate phrase pattern password (e.g., 2Dogs&3Cats!)
+            function generatePhrase() {
+                const includeVerb = document.getElementById('optIncludeVerb')?.checked ?? false;
+
+                const num1 = randomNumber(2, 9);
+                const num2 = randomNumber(2, 9);
+                const noun1 = randomItem(nouns);
+                const noun2 = randomItem(nouns);
+                const symbol = randomItem(symbols);
+                const connector = randomItem(['&', '+', 'And', 'Or', 'With']);
+
+                let password;
+                let hint;
+
+                if (includeVerb) {
+                    const verb = randomItem(verbs);
+                    password = `${num1}${noun1}${verb}${symbol}`;
+                    hint = `Remember: "${num1} ${noun1} ${verb}" with "${symbol}"`;
+                } else {
+                    password = `${num1}${noun1}${connector}${num2}${noun2}${symbol}`;
+                    hint = `Remember: "${num1} ${noun1} ${connector.toLowerCase()} ${num2} ${noun2}"`;
+                }
+
+                return { password, hint };
+            }
+
+            // Generate leetspeak password
+            function generateLeetspeak() {
+                const levelInput = document.getElementById('optLeetLevel');
+                const level = levelInput ? parseInt(levelInput.value) : 2;
+
+                // Pick a base word combination
+                const word1 = randomItem(adjectives).toLowerCase();
+                const word2 = randomItem(nouns).toLowerCase();
+                const baseWord = word1 + word2;
+
+                // Apply leetspeak based on level
+                let password = '';
+                let substitutionChance = level === 1 ? 0.3 : level === 2 ? 0.5 : 0.8;
+
+                for (const char of baseWord) {
+                    if (leetMap[char] && Math.random() < substitutionChance) {
+                        password += randomItem(leetMap[char]);
+                    } else {
+                        // Random capitalization
+                        password += Math.random() > 0.5 ? char.toUpperCase() : char;
+                    }
+                }
+
+                // Add symbol and number
+                password += randomItem(symbols) + randomNumber(10, 99);
+
+                const hint = `Based on: "${word1}${word2}" with character substitutions`;
+                return { password, hint };
+            }
+
+            // Generate password based on current style
+            function generatePassword() {
+                let result;
+
+                switch (currentStyle) {
+                    case 'wordBased':
+                        result = generateWordBased();
+                        break;
+                    case 'phrase':
+                        result = generatePhrase();
+                        break;
+                    case 'leetspeak':
+                        result = generateLeetspeak();
+                        break;
+                    default:
+                        result = generateWordBased();
+                }
+
+                passwordText.textContent = result.password;
+                passwordHint.textContent = result.hint;
+                passwordHint.style.display = 'block';
+
+                updateStrength(result.password);
+            }
+
+            // Update strength meter
+            function updateStrength(password) {
+                const analysis = StrengthAnalyzer.analyze(password);
+
+                strengthFill.className = 'strength-fill ' + analysis.level;
+                strengthLabel.textContent = analysis.level.charAt(0).toUpperCase() + analysis.level.slice(1);
+                strengthDetails.textContent = `${analysis.entropy.toFixed(0)} bits · ${analysis.crackTime}`;
+
+                const widths = { weak: '25%', fair: '50%', good: '75%', strong: '100%' };
+                strengthFill.style.width = widths[analysis.level] || '0%';
+            }
+
+            // Update style options
+            function updateStyleOptions() {
+                styleOptions.innerHTML = styleOptionsConfig[currentStyle] || '';
+
+                // Add event listener for leetspeak slider
+                const leetSlider = document.getElementById('optLeetLevel');
+                if (leetSlider) {
+                    const leetValue = document.getElementById('leetLevelValue');
+                    const levels = ['Low', 'Medium', 'High'];
+                    leetSlider.addEventListener('input', () => {
+                        leetValue.textContent = levels[leetSlider.value - 1];
+                    });
+                }
+            }
+
+            // Copy to clipboard
+            async function copyToClipboard() {
+                const password = passwordText.textContent;
+                if (!password || password === 'Click generate to create a password') return;
+
+                try {
+                    await navigator.clipboard.writeText(password);
+                    copyBtn.classList.add('copied');
+                    setTimeout(() => copyBtn.classList.remove('copied'), 1500);
+                } catch (err) {
+                    // Fallback
+                    const textarea = document.createElement('textarea');
+                    textarea.value = password;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                }
+            }
+
+            // Event Listeners
+            generateBtn.addEventListener('click', generatePassword);
+            copyBtn.addEventListener('click', copyToClipboard);
+
+            styleRadios.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    currentStyle = e.target.value;
+                    updateStyleOptions();
+                });
+            });
+
+            // Initialize
+            updateStyleOptions();
+            generatePassword();
+        })();
+    </script>
+
+    <style>
+        .password-display-wrapper {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .password-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-lg) var(--spacing-xl);
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .password-text {
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+            font-weight: 600;
+            word-break: break-all;
+            flex: 1;
+        }
+
+        .password-hint {
+            display: none;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            padding: var(--spacing-sm);
+            cursor: pointer;
+            color: var(--text-secondary);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .copy-btn:hover {
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--primary-color);
+        }
+
+        .copy-btn.copied {
+            color: #34c759;
+        }
+
+        .memorable-controls {
+            margin: var(--spacing-xl) 0;
+        }
+
+        .style-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .style-option {
+            cursor: pointer;
+        }
+
+        .style-option input {
+            display: none;
+        }
+
+        .style-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--spacing-lg);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            background: var(--surface-color);
+            transition: all var(--transition-fast);
+            text-align: center;
+        }
+
+        .style-option input:checked + .style-card {
+            border-color: var(--primary-color);
+            background: rgba(0, 122, 255, 0.1);
+        }
+
+        .style-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .style-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+
+        .style-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .style-name {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .style-example {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .style-options {
+            margin-top: var(--spacing-lg);
+        }
+
+        .option-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+        }
+
+        .slider-control {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .slider-control input[type="range"] {
+            width: 200px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+
+        .techniques-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .technique-card {
+            padding: var(--spacing-lg);
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .technique-card h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .comparison-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .comparison-item {
+            padding: var(--spacing-lg);
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .comparison-header {
+            font-weight: 600;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .comparison-header.weak {
+            background: rgba(255, 59, 48, 0.15);
+            color: #ff3b30;
+        }
+
+        .comparison-header.balanced {
+            background: rgba(52, 199, 89, 0.15);
+            color: #34c759;
+        }
+
+        .comparison-header.strong {
+            background: rgba(0, 122, 255, 0.15);
+            color: var(--primary-color);
+        }
+
+        .comparison-example {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            word-break: break-all;
+        }
+
+        .comparison-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .comparison-note {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .password-text {
+                font-size: 1.1rem;
+            }
+
+            .style-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .option-row {
+                flex-direction: column;
+            }
+
+            .comparison-visual {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

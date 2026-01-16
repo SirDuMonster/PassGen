@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIN Generator - Random 4, 6, 8 Digit PIN Codes | PassGen</title>
+    <meta name="description" content="Generate secure random PIN codes instantly. Create 4-digit, 6-digit, or custom length PINs for banking, phones, and security systems. Free and secure.">
+    <meta name="keywords" content="pin generator, random pin generator, 4 digit pin generator, 6 digit pin generator, random number generator pin">
+    <meta name="author" content="PassGen">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/pin-generator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="PIN Generator - Random 4, 6, 8 Digit PIN Codes | PassGen">
+    <meta property="og:description" content="Generate secure random PIN codes instantly. Create 4-digit, 6-digit, or custom length PINs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://passgen-liard.vercel.app/pin-generator/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="PIN Generator - Random PIN Codes">
+    <meta name="twitter:description" content="Generate secure random PIN codes instantly.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PassGen PIN Generator",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "Generate secure random PIN codes for banking, phones, and security systems.",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo" aria-label="PassGen Home">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="6" y="14" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 14V10C10 6.68629 12.6863 4 16 4C19.3137 4 22 6.68629 22 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="16" cy="21" r="2" fill="currentColor"/>
+                </svg>
+                <span class="logo-text">PassGen</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="theme-icon sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="theme-icon moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="separator">/</span>
+                <span>PIN Generator</span>
+            </nav>
+
+            <section class="hero">
+                <h1 class="hero-title">Random PIN Generator</h1>
+                <p class="hero-subtitle">Generate secure PIN codes for banking, phones, and security systems</p>
+            </section>
+
+            <!-- PIN Display -->
+            <div class="password-display-card">
+                <div class="password-output" aria-live="polite" aria-label="Generated PIN">
+                    <span class="password-text pin-text" id="pinText">Click generate to create a PIN</span>
+                </div>
+                <div class="password-actions">
+                    <button class="btn btn-primary" id="copyBtn" aria-label="Copy PIN">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span>Copy</span>
+                    </button>
+                    <button class="btn btn-secondary" id="regenerateBtn" aria-label="Generate new PIN">
+                        <svg class="regenerate-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                        <span>Regenerate</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Strength Meter -->
+            <div class="strength-meter">
+                <div class="strength-bar">
+                    <div class="strength-fill" id="strengthFill"></div>
+                </div>
+                <div class="strength-info">
+                    <span class="strength-label" id="strengthLabel">--</span>
+                    <span class="strength-details">
+                        <span id="strengthEntropy">0 bits</span>
+                        <span class="separator">·</span>
+                        <span id="strengthTime">--</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- PIN Options -->
+            <div class="options-card">
+                <div class="option-group length-group">
+                    <label for="pinLength" class="option-label">PIN Length</label>
+                    <div class="length-controls">
+                        <input type="range" id="pinLength" class="length-slider" min="4" max="12" value="4" aria-label="PIN length">
+                        <input type="number" id="pinLengthInput" class="length-input" min="4" max="12" value="4" aria-label="PIN length value">
+                    </div>
+                </div>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="noRepeatedDigits">
+                    <span class="checkbox-custom"></span>
+                    <span>No repeated digits</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="noSequentialDigits">
+                    <span class="checkbox-custom"></span>
+                    <span>No sequential digits (123, 321)</span>
+                </label>
+            </div>
+
+            <section class="security-notice">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                <p><strong>Secure Generation:</strong> PINs are generated locally using cryptographically secure randomness. Perfect for bank cards, phone locks, and security systems.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Generate Secure PIN Codes</h2>
+                <p>A PIN (Personal Identification Number) is your first line of defense for securing bank cards, phone locks, security systems, and voicemail. While shorter than passwords, a random PIN is far more secure than predictable choices.</p>
+
+                <h3>Common PIN Uses</h3>
+                <ul>
+                    <li><strong>Bank cards and ATMs:</strong> 4-digit PINs protect your financial accounts</li>
+                    <li><strong>Phone unlock codes:</strong> 4-6 digit PINs secure your mobile device</li>
+                    <li><strong>Security systems:</strong> Alarm systems often use 4-8 digit codes</li>
+                    <li><strong>Voicemail:</strong> 4-digit PINs protect your messages</li>
+                    <li><strong>Safe deposit boxes:</strong> Access codes for secure storage</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>What Makes a Secure PIN?</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            Avoid Obvious Patterns
+                        </h4>
+                        <p>Never use 1234, 0000, 1111, or any simple sequence. These are the first codes attackers try.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            No Personal Info
+                        </h4>
+                        <p>Don't use birth dates, addresses, phone numbers, or any information others might guess.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            True Randomness
+                        </h4>
+                        <p>Let a computer generate your PIN. Human-chosen "random" numbers follow predictable patterns.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                            Unique Per Use
+                        </h4>
+                        <p>Use different PINs for different purposes. Don't use your bank PIN for your phone lock.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Worst PINs to Avoid</h2>
+                <p>Studies of leaked PIN databases reveal the most commonly used (and therefore worst) PINs:</p>
+                <table class="crack-time-table">
+                    <thead>
+                        <tr><th>PIN</th><th>Why It's Bad</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1234</td><td>Most common PIN - never use sequential numbers</td></tr>
+                        <tr><td>0000</td><td>Second most common - repeated digits are weak</td></tr>
+                        <tr><td>1111</td><td>Easy to guess repeated pattern</td></tr>
+                        <tr><td>1212</td><td>Simple repeating pattern</td></tr>
+                        <tr><td>7777</td><td>"Lucky" numbers are predictable</td></tr>
+                        <tr><td>Birth year (1990, etc.)</td><td>Personal information is easily researched</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <div class="cta-box">
+                <h3>Need a Full Password?</h3>
+                <p>For accounts that accept alphanumeric passwords, use our full password generator for maximum security.</p>
+                <a href="/" class="btn btn-primary">Password Generator</a>
+            </div>
+
+            <!-- FAQ -->
+            <section class="faq-section" aria-labelledby="faq-heading">
+                <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Is a 4-digit PIN secure enough?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>A random 4-digit PIN has 10,000 possible combinations. While not as secure as a password, it's sufficient when combined with limited attempts (most systems lock after 3-5 wrong attempts). For higher security, use 6+ digits.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Should I use the same PIN everywhere?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>No. Use different PINs for different purposes. If one is compromised, you don't want attackers to have access to all your accounts. At minimum, use separate PINs for banking and non-financial uses.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>How can I remember a random PIN?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Practice typing it several times when you first set it. Create a mental story or pattern on a number pad. Store it securely in a password manager. With repetition, even random numbers become memorable.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>What if I forget my PIN?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Most systems have recovery options - banks can issue new PINs, phones can be reset with your account password. This is why random PINs are safe to use - recovery is possible, but guessing is not.</p></div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Related Tools -->
+            <section class="content-section">
+                <h2>More Password Tools</h2>
+                <div class="tool-links">
+                    <a href="/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Password Generator</a>
+                    <a href="/passphrase-generator/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Passphrase Generator</a>
+                    <a href="/password-strength-checker/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Strength Checker</a>
+                    <a href="/bulk-password-generator/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Bulk Generator</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="toast" id="toast" role="alert" aria-live="assertive">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="toastMessage">Copied!</span>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+            <nav class="footer-links"><a href="/#privacy-section">Privacy</a><a href="https://github.com/SirDuMonster/PassGen" target="_blank" rel="noopener noreferrer">GitHub</a></nav>
+        </div>
+    </footer>
+
+    <script src="../js/generator.js"></script>
+    <script src="../js/strength.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+    (function() {
+        'use strict';
+        const elements = {
+            themeToggle: document.getElementById('themeToggle'),
+            pinText: document.getElementById('pinText'),
+            copyBtn: document.getElementById('copyBtn'),
+            regenerateBtn: document.getElementById('regenerateBtn'),
+            pinLength: document.getElementById('pinLength'),
+            pinLengthInput: document.getElementById('pinLengthInput'),
+            noRepeatedDigits: document.getElementById('noRepeatedDigits'),
+            noSequentialDigits: document.getElementById('noSequentialDigits'),
+            strengthFill: document.getElementById('strengthFill'),
+            strengthLabel: document.getElementById('strengthLabel'),
+            strengthEntropy: document.getElementById('strengthEntropy'),
+            strengthTime: document.getElementById('strengthTime'),
+            toast: document.getElementById('toast'),
+            toastMessage: document.getElementById('toastMessage')
+        };
+
+        let toastTimeout = null;
+
+        function showToast(message = 'Copied!') {
+            if (toastTimeout) clearTimeout(toastTimeout);
+            elements.toastMessage.textContent = message;
+            elements.toast.classList.add('show');
+            toastTimeout = setTimeout(() => elements.toast.classList.remove('show'), 2000);
+        }
+
+        function showCopySuccess(button) {
+            if (!button) return;
+            button.classList.add('copied');
+            const span = button.querySelector('span');
+            const originalText = span ? span.textContent : 'Copy';
+            if (span) span.textContent = 'Copied!';
+            setTimeout(() => { button.classList.remove('copied'); if (span) span.textContent = originalText; }, 1500);
+        }
+
+        async function copyToClipboard(text, button = null) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Copied!');
+                showCopySuccess(button);
+            } catch (err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast('Copied!'); showCopySuccess(button); } catch (e) { showToast('Failed to copy'); }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function updateStrengthMeter(pin) {
+            const entropy = Math.round(pin.length * 3.322 * 10) / 10;
+            const level = StrengthAnalyzer.getStrengthLevel(entropy);
+            const crackTime = StrengthAnalyzer.estimateCrackTime(entropy);
+            elements.strengthFill.setAttribute('data-strength', level.key);
+            elements.strengthLabel.setAttribute('data-strength', level.key);
+            elements.strengthLabel.textContent = level.name;
+            elements.strengthEntropy.textContent = `${entropy} bits`;
+            elements.strengthTime.textContent = crackTime;
+        }
+
+        function generatePIN() {
+            const length = parseInt(elements.pinLength.value, 10);
+            // Validate no repeated digits constraint
+            if (length > 10 && elements.noRepeatedDigits.checked) {
+                elements.noRepeatedDigits.checked = false;
+                showToast('No repeated digits disabled (max 10 unique digits)');
+            }
+            const options = {
+                length: length,
+                noRepeatedDigits: elements.noRepeatedDigits.checked,
+                noSequentialDigits: elements.noSequentialDigits.checked
+            };
+            const pin = Generator.generatePIN(options);
+            elements.pinText.textContent = pin;
+            elements.regenerateBtn.querySelector('.regenerate-icon').style.transform = 'rotate(360deg)';
+            setTimeout(() => elements.regenerateBtn.querySelector('.regenerate-icon').style.transform = '', 300);
+            updateStrengthMeter(pin);
+        }
+
+        function syncSliderInput(slider, input, callback) {
+            slider.addEventListener('input', () => { input.value = slider.value; callback(); });
+            input.addEventListener('input', () => {
+                let value = parseInt(input.value, 10);
+                const min = parseInt(input.min, 10), max = parseInt(input.max, 10);
+                if (isNaN(value)) value = min;
+                if (value < min) value = min;
+                if (value > max) value = max;
+                input.value = value;
+                slider.value = value;
+                callback();
+            });
+        }
+
+        function init() {
+            Theme.init();
+            elements.themeToggle.addEventListener('click', () => Theme.toggle());
+            elements.copyBtn.addEventListener('click', () => {
+                const text = elements.pinText.textContent;
+                if (text && !text.includes('Click generate')) copyToClipboard(text, elements.copyBtn);
+            });
+            elements.regenerateBtn.addEventListener('click', generatePIN);
+            syncSliderInput(elements.pinLength, elements.pinLengthInput, generatePIN);
+            elements.noRepeatedDigits.addEventListener('change', () => {
+                if (elements.noRepeatedDigits.checked && parseInt(elements.pinLength.value) > 10) {
+                    elements.pinLength.value = 10;
+                    elements.pinLengthInput.value = 10;
+                    showToast('PIN length reduced to 10');
+                }
+                generatePIN();
+            });
+            elements.noSequentialDigits.addEventListener('change', generatePIN);
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'g') { e.preventDefault(); generatePIN(); }
+                if ((e.ctrlKey || e.metaKey) && e.key === 'c' && !e.target.matches('input, textarea')) {
+                    const text = elements.pinText.textContent;
+                    if (text && !text.includes('Click generate')) copyToClipboard(text);
+                }
+            });
+            generatePIN();
+        }
+
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
+    })();
+    </script>
+</body>
+</html>

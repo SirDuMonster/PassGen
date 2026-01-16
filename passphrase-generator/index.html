@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passphrase Generator - Secure & Memorable Random Phrases | PassGen</title>
+    <meta name="description" content="Generate secure passphrases that are easy to remember. Random word combinations that are both strong and memorable. Free diceware-style generator.">
+    <meta name="keywords" content="passphrase generator, random passphrase generator, diceware generator, secure passphrase generator, memorable password generator">
+    <meta name="author" content="PassGen">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/passphrase-generator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Passphrase Generator - Secure & Memorable Phrases | PassGen">
+    <meta property="og:description" content="Generate secure passphrases that are easy to remember. Random word combinations that are strong and memorable.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://passgen-liard.vercel.app/passphrase-generator/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Passphrase Generator - Memorable Security">
+    <meta name="twitter:description" content="Generate secure passphrases that are easy to remember.">
+
+    <!-- Favicon & Fonts -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PassGen Passphrase Generator",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "description": "Generate secure passphrases using random word combinations that are easy to remember.",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo" aria-label="PassGen Home">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="14" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 14V10C10 6.68629 12.6863 4 16 4C19.3137 4 22 6.68629 22 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="16" cy="21" r="2" fill="currentColor"/>
+                </svg>
+                <span class="logo-text">PassGen</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="theme-icon sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="theme-icon moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a>
+                <span class="separator">/</span>
+                <span>Passphrase Generator</span>
+            </nav>
+
+            <section class="hero">
+                <h1 class="hero-title">Passphrase Generator</h1>
+                <p class="hero-subtitle">Secure passwords that are easy to remember</p>
+            </section>
+
+            <!-- Passphrase Display -->
+            <div class="password-display-card">
+                <div class="password-output" aria-live="polite" aria-label="Generated passphrase">
+                    <span class="password-text passphrase-text" id="passphraseText">Click generate to create a passphrase</span>
+                </div>
+                <div class="password-actions">
+                    <button class="btn btn-primary" id="copyBtn" aria-label="Copy passphrase">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span>Copy</span>
+                    </button>
+                    <button class="btn btn-secondary" id="regenerateBtn" aria-label="Generate new passphrase">
+                        <svg class="regenerate-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                        <span>Regenerate</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Strength Meter -->
+            <div class="strength-meter">
+                <div class="strength-bar">
+                    <div class="strength-fill" id="strengthFill"></div>
+                </div>
+                <div class="strength-info">
+                    <span class="strength-label" id="strengthLabel">--</span>
+                    <span class="strength-details">
+                        <span id="strengthEntropy">0 bits</span>
+                        <span class="separator">·</span>
+                        <span id="strengthTime">--</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Passphrase Options -->
+            <div class="options-card">
+                <div class="option-group length-group">
+                    <label for="wordCount" class="option-label">Word Count</label>
+                    <div class="length-controls">
+                        <input type="range" id="wordCount" class="length-slider" min="3" max="8" value="4" aria-label="Word count">
+                        <input type="number" id="wordCountInput" class="length-input" min="3" max="8" value="4" aria-label="Word count value">
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <label for="separator" class="option-label">Separator</label>
+                    <select id="separator" class="select-input">
+                        <option value="-">Hyphen (-)</option>
+                        <option value="_">Underscore (_)</option>
+                        <option value=" ">Space</option>
+                        <option value=".">Period (.)</option>
+                        <option value="">None</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label for="capitalize" class="option-label">Capitalization</label>
+                    <select id="capitalize" class="select-input">
+                        <option value="none">lowercase</option>
+                        <option value="first" selected>First Letter</option>
+                        <option value="all">ALL CAPS</option>
+                    </select>
+                </div>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="includeNumber">
+                    <span class="checkbox-custom"></span>
+                    <span>Include a number</span>
+                </label>
+            </div>
+
+            <section class="security-notice">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                <p><strong>Memorable Security:</strong> Passphrases use random words from a 3,223-word list, providing strong entropy while remaining easy to remember and type.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>What is a Passphrase?</h2>
+                <p>A passphrase is a password made of multiple random words strung together. The classic example is "correct horse battery staple" from the famous XKCD comic. Passphrases are:</p>
+                <ul>
+                    <li><strong>Easier to remember:</strong> Words are more memorable than random characters</li>
+                    <li><strong>Easier to type:</strong> No hunting for symbols on unfamiliar keyboards</li>
+                    <li><strong>Equally or more secure:</strong> Four random words can have more entropy than a short complex password</li>
+                    <li><strong>Resistant to attacks:</strong> Random word selection defeats dictionary attacks</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>Passphrase vs Password</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Aspect</th><th>Passphrase</th><th>Random Password</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Memorability</td><td class="check">Easier to remember</td><td class="cross">Harder to remember</td></tr>
+                        <tr><td>Typing ease</td><td class="check">Simple to type</td><td class="cross">Requires special characters</td></tr>
+                        <tr><td>Length</td><td>Usually 20-40 characters</td><td>Usually 12-20 characters</td></tr>
+                        <tr><td>Entropy (4 words)</td><td>~47 bits</td><td>~52 bits (12 chars, all types)</td></tr>
+                        <tr><td>Best for</td><td>Master passwords, memorable logins</td><td>Auto-filled accounts, API keys</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="content-section">
+                <h2>How Our Passphrase Generator Works</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Curated Word List
+                        </h4>
+                        <p>Uses a carefully selected list of 3,223 common English words that are easy to spell and remember.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            Cryptographic Randomness
+                        </h4>
+                        <p>Words are selected using secure random generation, ensuring true unpredictability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            Customizable Format
+                        </h4>
+                        <p>Choose separators, capitalization, and optional numbers to meet any password requirements.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>
+                            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Local Only
+                        </h4>
+                        <p>Everything happens in your browser. No passphrases are ever sent to any server.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="cta-box">
+                <h3>Need Maximum Security?</h3>
+                <p>For critical accounts, our strong password generator creates even more secure random passwords.</p>
+                <a href="/strong-password-generator/" class="btn btn-primary">Strong Password Generator</a>
+            </div>
+
+            <!-- FAQ -->
+            <section class="faq-section" aria-labelledby="faq-heading">
+                <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>How many words should my passphrase have?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Four words is the minimum for reasonable security (~47 bits entropy). For important accounts, use 5-6 words (~59-70 bits). Each additional word roughly doubles the number of possibilities an attacker must try.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Is a passphrase really secure?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Yes, when generated randomly. A 4-word passphrase from our 3,223-word list has over 100 billion possible combinations. The key is that words must be selected randomly - never create your own phrase using words you choose.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Can attackers just try dictionary words?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Attackers can try combinations of dictionary words, but with 3,223 words and 4+ positions, the combinations become astronomical. It would take billions of years to try all 4-word combinations at 10 billion guesses per second.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>Should I add numbers or symbols?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Adding a number increases entropy and helps meet sites that require numbers. For maximum security, adding another word is more effective than adding a single number, but numbers help with compatibility.</p></div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question"><span>When should I use a passphrase vs a password?</span><svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                        <div class="faq-answer"><p>Use passphrases for things you need to remember and type frequently: master passwords, computer logins, encryption keys. Use random passwords for accounts where your password manager auto-fills - you don't need to remember them.</p></div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Related Tools -->
+            <section class="content-section">
+                <h2>More Password Tools</h2>
+                <div class="tool-links">
+                    <a href="/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Password Generator</a>
+                    <a href="/strong-password-generator/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Strong Password Generator</a>
+                    <a href="/memorable-password-generator/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Memorable Generator</a>
+                    <a href="/password-strength-checker/" class="tool-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Strength Checker</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="toast" id="toast" role="alert" aria-live="assertive">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="toastMessage">Copied!</span>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+            <nav class="footer-links"><a href="/#privacy-section">Privacy</a><a href="https://github.com/SirDuMonster/PassGen" target="_blank" rel="noopener noreferrer">GitHub</a></nav>
+        </div>
+    </footer>
+
+    <script src="../js/wordlist.js"></script>
+    <script src="../js/generator.js"></script>
+    <script src="../js/strength.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+    (function() {
+        'use strict';
+        const elements = {
+            themeToggle: document.getElementById('themeToggle'),
+            passphraseText: document.getElementById('passphraseText'),
+            copyBtn: document.getElementById('copyBtn'),
+            regenerateBtn: document.getElementById('regenerateBtn'),
+            wordCount: document.getElementById('wordCount'),
+            wordCountInput: document.getElementById('wordCountInput'),
+            separator: document.getElementById('separator'),
+            capitalize: document.getElementById('capitalize'),
+            includeNumber: document.getElementById('includeNumber'),
+            strengthFill: document.getElementById('strengthFill'),
+            strengthLabel: document.getElementById('strengthLabel'),
+            strengthEntropy: document.getElementById('strengthEntropy'),
+            strengthTime: document.getElementById('strengthTime'),
+            toast: document.getElementById('toast'),
+            toastMessage: document.getElementById('toastMessage')
+        };
+
+        let toastTimeout = null;
+
+        function showToast(message = 'Copied!') {
+            if (toastTimeout) clearTimeout(toastTimeout);
+            elements.toastMessage.textContent = message;
+            elements.toast.classList.add('show');
+            toastTimeout = setTimeout(() => elements.toast.classList.remove('show'), 2000);
+        }
+
+        function showCopySuccess(button) {
+            if (!button) return;
+            button.classList.add('copied');
+            const span = button.querySelector('span');
+            const originalText = span ? span.textContent : 'Copy';
+            if (span) span.textContent = 'Copied!';
+            setTimeout(() => { button.classList.remove('copied'); if (span) span.textContent = originalText; }, 1500);
+        }
+
+        async function copyToClipboard(text, button = null) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Copied!');
+                showCopySuccess(button);
+            } catch (err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast('Copied!'); showCopySuccess(button); } catch (e) { showToast('Failed to copy'); }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function getOptions() {
+            return {
+                wordCount: parseInt(elements.wordCount.value, 10),
+                separator: elements.separator.value,
+                capitalize: elements.capitalize.value,
+                includeNumber: elements.includeNumber.checked
+            };
+        }
+
+        function updateStrengthMeter(options) {
+            const analysis = StrengthAnalyzer.analyzePassphrase(options.wordCount, options.includeNumber);
+            elements.strengthFill.setAttribute('data-strength', analysis.level.key);
+            elements.strengthLabel.setAttribute('data-strength', analysis.level.key);
+            elements.strengthLabel.textContent = analysis.level.name;
+            elements.strengthEntropy.textContent = `${analysis.entropy} bits`;
+            elements.strengthTime.textContent = analysis.crackTime;
+        }
+
+        function generatePassphrase() {
+            const options = getOptions();
+            const passphrase = Generator.generatePassphrase(options);
+            elements.passphraseText.textContent = passphrase;
+            elements.regenerateBtn.querySelector('.regenerate-icon').style.transform = 'rotate(360deg)';
+            setTimeout(() => elements.regenerateBtn.querySelector('.regenerate-icon').style.transform = '', 300);
+            updateStrengthMeter(options);
+        }
+
+        function syncSliderInput(slider, input, callback) {
+            slider.addEventListener('input', () => { input.value = slider.value; callback(); });
+            input.addEventListener('input', () => {
+                let value = parseInt(input.value, 10);
+                const min = parseInt(input.min, 10), max = parseInt(input.max, 10);
+                if (isNaN(value)) value = min;
+                if (value < min) value = min;
+                if (value > max) value = max;
+                input.value = value;
+                slider.value = value;
+                callback();
+            });
+        }
+
+        function init() {
+            Theme.init();
+            elements.themeToggle.addEventListener('click', () => Theme.toggle());
+            elements.copyBtn.addEventListener('click', () => {
+                const text = elements.passphraseText.textContent;
+                if (text && !text.includes('Click generate')) copyToClipboard(text, elements.copyBtn);
+            });
+            elements.regenerateBtn.addEventListener('click', generatePassphrase);
+            syncSliderInput(elements.wordCount, elements.wordCountInput, generatePassphrase);
+            elements.separator.addEventListener('change', generatePassphrase);
+            elements.capitalize.addEventListener('change', generatePassphrase);
+            elements.includeNumber.addEventListener('change', generatePassphrase);
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'g') { e.preventDefault(); generatePassphrase(); }
+                if ((e.ctrlKey || e.metaKey) && e.key === 'c' && !e.target.matches('input, textarea')) {
+                    const text = elements.passphraseText.textContent;
+                    if (text && !text.includes('Click generate')) copyToClipboard(text);
+                }
+            });
+            generatePassphrase();
+        }
+
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
+    })();
+    </script>
+</body>
+</html>

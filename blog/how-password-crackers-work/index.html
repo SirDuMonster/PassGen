@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Password Crackers Work: Understanding the Threat | PassGen</title>
+    <meta name="description" content="Learn how hackers crack passwords using brute force, dictionary attacks, rainbow tables, and social engineering. Understand the threat to protect yourself.">
+    <meta name="keywords" content="password cracking, brute force attack, dictionary attack, rainbow table, password hacking">
+    <link rel="canonical" href="https://passgen-liard.vercel.app/blog/how-password-crackers-work/">
+
+    <meta property="og:title" content="How Password Crackers Work">
+    <meta property="og:description" content="Understand password cracking techniques to better protect yourself.">
+    <meta property="og:url" content="https://passgen-liard.vercel.app/blog/how-password-crackers-work/">
+    <meta property="og:type" content="article">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How Password Crackers Work: Understanding the Threat",
+        "description": "Learn how hackers crack passwords and how to protect yourself.",
+        "author": {"@type": "Organization", "name": "PassGen"},
+        "publisher": {"@type": "Organization", "name": "PassGen"},
+        "datePublished": "2025-01-06",
+        "dateModified": "2025-01-06"
+    }
+    </script>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/blog.css">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../../" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="16" r="1"></circle>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                PassGen
+            </a>
+            <nav class="nav-links">
+                <a href="../../#features">Features</a>
+                <a href="../">Blog</a>
+                <a href="../../password-strength-checker/">Strength Checker</a>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="../../">Home</a>
+            <span class="separator">›</span>
+            <a href="../">Blog</a>
+            <span class="separator">›</span>
+            <span class="current">How Password Crackers Work</span>
+        </nav>
+
+        <article class="blog-article">
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="category">Security</span>
+                    <span class="date">January 6, 2025</span>
+                    <span class="read-time">8 min read</span>
+                </div>
+                <h1>How Password Crackers Work: Understanding the Threat</h1>
+                <p class="article-subtitle">Know your enemy to better defend yourself</p>
+            </header>
+
+            <div class="article-content">
+                <p class="lead">Understanding how attackers crack passwords helps you create better ones. This guide explains the main techniques hackers use—and how to defend against each.</p>
+
+                <h2>How Passwords Are Stored</h2>
+                <p>First, understand that responsible websites don't store your actual password. They store a <strong>hash</strong>—a one-way mathematical transformation.</p>
+
+                <div class="code-example">
+                    <p><strong>Your password:</strong> MySecret123</p>
+                    <p><strong>SHA-256 hash:</strong> 7f2ababa62...(64 characters)</p>
+                </div>
+
+                <p>When you log in, the site hashes your input and compares it to the stored hash. If they match, you're authenticated—without ever storing your actual password.</p>
+
+                <p>Password cracking is the process of finding what input produces a specific hash.</p>
+
+                <h2>Cracking Method #1: Brute Force</h2>
+                <p>The simplest approach: try every possible combination.</p>
+
+                <div class="method-box">
+                    <h3>How It Works</h3>
+                    <p>Start with "a", then "b", "c"... then "aa", "ab", "ac"... and continue until you find a match.</p>
+
+                    <h3>Speed</h3>
+                    <p>Modern GPUs can try billions of hashes per second. A single RTX 4090 can test:</p>
+                    <ul>
+                        <li><strong>MD5:</strong> ~165 billion/second</li>
+                        <li><strong>SHA-256:</strong> ~23 billion/second</li>
+                        <li><strong>bcrypt:</strong> ~184,000/second (designed to be slow)</li>
+                    </ul>
+
+                    <h3>Defense</h3>
+                    <p>Use long passwords. Each additional character multiplies crack time exponentially:</p>
+                    <ul>
+                        <li>8 characters: Hours to days</li>
+                        <li>12 characters: Months to years</li>
+                        <li>16 characters: Millions of years</li>
+                    </ul>
+                </div>
+
+                <h2>Cracking Method #2: Dictionary Attacks</h2>
+                <p>Instead of random combinations, try common words and passwords.</p>
+
+                <div class="method-box">
+                    <h3>How It Works</h3>
+                    <p>Use lists of:</p>
+                    <ul>
+                        <li>Dictionary words in multiple languages</li>
+                        <li>Previously leaked passwords</li>
+                        <li>Common names and phrases</li>
+                        <li>Keyboard patterns (qwerty, 123456)</li>
+                    </ul>
+
+                    <h3>The "RockYou" List</h3>
+                    <p>In 2009, the RockYou breach exposed 32 million plaintext passwords. This list revealed that most people use predictable passwords. The top 10:</p>
+                    <ol>
+                        <li>123456</li>
+                        <li>12345</li>
+                        <li>123456789</li>
+                        <li>password</li>
+                        <li>iloveyou</li>
+                        <li>princess</li>
+                        <li>1234567</li>
+                        <li>rockyou</li>
+                        <li>12345678</li>
+                        <li>abc123</li>
+                    </ol>
+
+                    <h3>Defense</h3>
+                    <p>Never use dictionary words, common phrases, or passwords from breach lists. Use randomly generated passwords.</p>
+                </div>
+
+                <h2>Cracking Method #3: Rule-Based Attacks</h2>
+                <p>Apply transformations to dictionary words to catch "clever" variations.</p>
+
+                <div class="method-box">
+                    <h3>Common Rules</h3>
+                    <ul>
+                        <li><strong>Capitalization:</strong> password → Password, PASSWORD</li>
+                        <li><strong>Append numbers:</strong> password → password1, password123, password2024</li>
+                        <li><strong>Append symbols:</strong> password → password!, password@</li>
+                        <li><strong>Leet speak:</strong> password → p@ssw0rd, p455w0rd</li>
+                        <li><strong>Combinations:</strong> password → P@ssw0rd123!</li>
+                    </ul>
+
+                    <h3>Defense</h3>
+                    <p>These rules are well-known. "P@ssw0rd!" isn't clever—it's one of the first variations tested. True randomness defeats rule-based attacks.</p>
+                </div>
+
+                <h2>Cracking Method #4: Rainbow Tables</h2>
+                <p>Pre-compute hashes for millions of passwords, then just look them up.</p>
+
+                <div class="method-box">
+                    <h3>How It Works</h3>
+                    <p>Instead of computing hashes during the attack, compute them in advance and store in a massive lookup table. When you get a hash, just search the table.</p>
+
+                    <h3>Limitation</h3>
+                    <p>Tables can be enormous (terabytes) and only work for specific hash types. They're defeated by <strong>salting</strong>—adding random data to each password before hashing.</p>
+
+                    <h3>Defense</h3>
+                    <p>This is the website's responsibility. Proper password hashing (bcrypt, Argon2) includes salting automatically. As a user, use unique passwords so a cracked hash on one site doesn't work elsewhere.</p>
+                </div>
+
+                <h2>Cracking Method #5: Targeted Attacks</h2>
+                <p>Research the victim to build custom wordlists.</p>
+
+                <div class="method-box">
+                    <h3>Information Sources</h3>
+                    <ul>
+                        <li>Social media profiles</li>
+                        <li>Public records (addresses, family names)</li>
+                        <li>Previous data breaches</li>
+                        <li>Company websites (for work accounts)</li>
+                        <li>Physical surveillance (pet names, car models)</li>
+                    </ul>
+
+                    <h3>How It Works</h3>
+                    <p>If an attacker knows your dog is named Max, they try: Max, Max123, ILoveMax, Max2020, M@x!, etc. Combined with rule-based attacks, personal information dramatically reduces the search space.</p>
+
+                    <h3>Defense</h3>
+                    <p>Never use personal information in passwords. Random passwords can't be researched.</p>
+                </div>
+
+                <h2>Cracking Method #6: Credential Stuffing</h2>
+                <p>Not cracking at all—just reusing stolen credentials.</p>
+
+                <div class="method-box">
+                    <h3>How It Works</h3>
+                    <p>When Site A gets breached, attackers try those username/password combinations on Sites B, C, D, etc. If you reuse passwords, one breach compromises all your accounts.</p>
+
+                    <h3>Scale</h3>
+                    <p>Billions of credentials are available from past breaches. Automated tools can test thousands of sites in hours.</p>
+
+                    <h3>Defense</h3>
+                    <p>Use unique passwords for every account. A password manager makes this practical.</p>
+                </div>
+
+                <h2>Cracking Method #7: Phishing</h2>
+                <p>Why crack the password when you can just ask for it?</p>
+
+                <div class="method-box">
+                    <h3>How It Works</h3>
+                    <p>Create a fake login page that looks identical to the real one. Send victims links via email, SMS, or ads. When they "log in," capture their credentials.</p>
+
+                    <h3>Defense</h3>
+                    <ul>
+                        <li>Check URLs carefully before entering credentials</li>
+                        <li>Use 2FA (phished password alone isn't enough)</li>
+                        <li>Use a password manager (won't autofill on fake sites)</li>
+                        <li>Be suspicious of unexpected login requests</li>
+                    </ul>
+                </div>
+
+                <h2>How Long Would Your Password Take to Crack?</h2>
+
+                <table class="crack-time-table">
+                    <thead>
+                        <tr>
+                            <th>Password Type</th>
+                            <th>Example</th>
+                            <th>Crack Time*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Common password</td>
+                            <td>password123</td>
+                            <td class="time-bad">Instant</td>
+                        </tr>
+                        <tr>
+                            <td>Dictionary + rules</td>
+                            <td>P@ssw0rd!</td>
+                            <td class="time-bad">Seconds</td>
+                        </tr>
+                        <tr>
+                            <td>8 random chars</td>
+                            <td>Kj9#mP2x</td>
+                            <td class="time-medium">Days</td>
+                        </tr>
+                        <tr>
+                            <td>12 random chars</td>
+                            <td>Kj9#mP2x$Lw4</td>
+                            <td class="time-good">Centuries</td>
+                        </tr>
+                        <tr>
+                            <td>16 random chars</td>
+                            <td>Kj9#mP2x$Lw4nQ8r</td>
+                            <td class="time-great">Billions of years</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="table-note">*Assuming offline attack against weak hash with modern GPU cluster</p>
+
+                <h2>Summary: How to Stay Safe</h2>
+                <ol>
+                    <li><strong>Use random passwords</strong>—defeats dictionary and targeted attacks</li>
+                    <li><strong>Use long passwords (16+)</strong>—defeats brute force</li>
+                    <li><strong>Use unique passwords</strong>—defeats credential stuffing</li>
+                    <li><strong>Enable 2FA</strong>—defeats phishing (partially)</li>
+                    <li><strong>Use a password manager</strong>—makes all of the above practical</li>
+                </ol>
+            </div>
+
+            <div class="article-cta">
+                <h3>Generate Uncrackable Passwords</h3>
+                <p>True randomness that defeats every cracking method.</p>
+                <a href="../../" class="btn btn-primary">Generate Password</a>
+            </div>
+        </article>
+
+        <section class="related-posts">
+            <h2>Related Articles</h2>
+            <div class="related-grid">
+                <a href="../password-length-vs-complexity/" class="related-card">
+                    <h3>Password Length vs Complexity</h3>
+                    <p>What matters more for security?</p>
+                </a>
+                <a href="../check-if-password-leaked/" class="related-card">
+                    <h3>Check If Your Password Was Leaked</h3>
+                    <p>Find out if you're in a breach database.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>PassGen</h4>
+                <p>Free, secure password generation tools.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="../../">Password Generator</a></li>
+                    <li><a href="../../passphrase-generator/">Passphrase Generator</a></li>
+                    <li><a href="../../password-strength-checker/">Strength Checker</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="../">Blog</a></li>
+                    <li><a href="../../glossary/">Glossary</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/theme.js"></script>
+    <style>
+        .code-example { background: var(--surface-color); padding: var(--spacing-md); border-radius: var(--radius-md); font-family: monospace; margin: var(--spacing-md) 0; }
+        .method-box { background: var(--card-bg); padding: var(--spacing-xl); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0; border: 1px solid var(--border-color); }
+        .method-box h3 { color: var(--primary-color); margin-bottom: var(--spacing-sm); margin-top: var(--spacing-lg); }
+        .method-box h3:first-child { margin-top: 0; }
+        .crack-time-table { width: 100%; border-collapse: collapse; margin: var(--spacing-xl) 0; }
+        .crack-time-table th, .crack-time-table td { padding: var(--spacing-md); text-align: left; border-bottom: 1px solid var(--border-color); }
+        .crack-time-table th { background: var(--surface-color); }
+        .time-bad { color: #ff3b30; font-weight: 600; }
+        .time-medium { color: #ff9500; font-weight: 600; }
+        .time-good { color: #34c759; font-weight: 600; }
+        .time-great { color: #007aff; font-weight: 600; }
+        .table-note { font-size: 0.85rem; color: var(--text-secondary); margin-top: var(--spacing-sm); }
+    </style>
+</body>
+</html>
