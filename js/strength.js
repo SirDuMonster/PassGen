@@ -113,23 +113,41 @@ const StrengthAnalyzer = (function() {
     function formatTime(seconds) {
         if (seconds < 0.001) return 'Instant';
         if (seconds < 1) return 'Less than a second';
-        if (seconds < 60) return `${Math.round(seconds)} seconds`;
+        if (seconds < 60) {
+            const s = Math.round(seconds);
+            return `${s} ${s === 1 ? 'second' : 'seconds'}`;
+        }
 
         const minutes = seconds / 60;
-        if (minutes < 60) return `${Math.round(minutes)} minutes`;
+        if (minutes < 60) {
+            const m = Math.round(minutes);
+            return `${m} ${m === 1 ? 'minute' : 'minutes'}`;
+        }
 
         const hours = minutes / 60;
-        if (hours < 24) return `${Math.round(hours)} hours`;
+        if (hours < 24) {
+            const h = Math.round(hours);
+            return `${h} ${h === 1 ? 'hour' : 'hours'}`;
+        }
 
         const days = hours / 24;
-        if (days < 30) return `${Math.round(days)} days`;
+        if (days < 30) {
+            const d = Math.round(days);
+            return `${d} ${d === 1 ? 'day' : 'days'}`;
+        }
 
         const months = days / 30;
-        if (months < 12) return `${Math.round(months)} months`;
+        if (months < 12) {
+            const mo = Math.round(months);
+            return `${mo} ${mo === 1 ? 'month' : 'months'}`;
+        }
 
         const years = days / 365.25;
 
-        if (years < 1000) return `${Math.round(years)} years`;
+        if (years < 1000) {
+            const y = Math.round(years);
+            return `${y} ${y === 1 ? 'year' : 'years'}`;
+        }
         if (years < 1e6) return `${formatCompact(years)} years`;
         if (years < 1e9) return `${formatCompact(years / 1e6)} million years`;
         if (years < 1e12) return `${formatCompact(years / 1e9)} billion years`;

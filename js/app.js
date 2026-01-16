@@ -61,6 +61,10 @@
         pinLengthInput: document.getElementById('pinLengthInput'),
         noRepeatedDigits: document.getElementById('noRepeatedDigits'),
         noSequentialDigits: document.getElementById('noSequentialDigits'),
+        pinStrengthFill: document.getElementById('pinStrengthFill'),
+        pinStrengthLabel: document.getElementById('pinStrengthLabel'),
+        pinStrengthEntropy: document.getElementById('pinStrengthEntropy'),
+        pinStrengthTime: document.getElementById('pinStrengthTime'),
 
         // Bulk Generator
         bulkCount: document.getElementById('bulkCount'),
@@ -97,13 +101,33 @@
     }
 
     /**
+     * Show copy button success state
+     * @param {HTMLElement} button - The copy button element
+     */
+    function showCopySuccess(button) {
+        if (!button) return;
+
+        button.classList.add('copied');
+        const span = button.querySelector('span');
+        const originalText = span ? span.textContent : 'Copy';
+        if (span) span.textContent = 'Copied!';
+
+        setTimeout(() => {
+            button.classList.remove('copied');
+            if (span) span.textContent = originalText;
+        }, 1500);
+    }
+
+    /**
      * Copy text to clipboard
      * @param {string} text - Text to copy
+     * @param {HTMLElement} button - Optional button to show success state
      */
-    async function copyToClipboard(text) {
+    async function copyToClipboard(text, button = null) {
         try {
             await navigator.clipboard.writeText(text);
             showToast('Copied!');
+            showCopySuccess(button);
 
             // Announce to screen readers
             const announcement = document.createElement('div');
@@ -124,6 +148,7 @@
             try {
                 document.execCommand('copy');
                 showToast('Copied!');
+                showCopySuccess(button);
             } catch (e) {
                 showToast('Failed to copy');
             }
@@ -235,12 +260,37 @@
     }
 
     /**
+     * Update PIN strength meter
+     * @param {string} pin - Generated PIN
+     */
+    function updatePinStrengthMeter(pin) {
+        if (!pin || !elements.pinStrengthFill) return;
+
+        // Calculate PIN entropy: log2(10^length) = length * log2(10) ≈ length * 3.322
+        const entropy = Math.round(pin.length * 3.322 * 10) / 10;
+        const analysis = {
+            entropy,
+            level: StrengthAnalyzer.getStrengthLevel(entropy),
+            crackTime: StrengthAnalyzer.estimateCrackTime(entropy)
+        };
+
+        elements.pinStrengthFill.setAttribute('data-strength', analysis.level.key);
+        elements.pinStrengthLabel.setAttribute('data-strength', analysis.level.key);
+        elements.pinStrengthLabel.textContent = analysis.level.name;
+        elements.pinStrengthEntropy.textContent = `${analysis.entropy} bits`;
+        elements.pinStrengthTime.textContent = analysis.crackTime;
+    }
+
+    /**
      * Generate and display PIN
      */
     function generatePIN() {
         const options = getPinOptions();
         const pin = Generator.generatePIN(options);
         elements.pinText.textContent = pin;
+
+        // Update PIN strength meter
+        updatePinStrengthMeter(pin);
     }
 
     /**
@@ -370,7 +420,7 @@
         elements.copyBtn.addEventListener('click', () => {
             const text = elements.passwordText.textContent;
             if (text && !text.includes('Click generate')) {
-                copyToClipboard(text);
+                copyToClipboard(text, elements.copyBtn);
             }
         });
 
@@ -397,7 +447,7 @@
         elements.copyPassphraseBtn.addEventListener('click', () => {
             const text = elements.passphraseText.textContent;
             if (text && !text.includes('Click generate')) {
-                copyToClipboard(text);
+                copyToClipboard(text, elements.copyPassphraseBtn);
             }
         });
 
@@ -413,7 +463,7 @@
         elements.copyPinBtn.addEventListener('click', () => {
             const text = elements.pinText.textContent;
             if (text && !text.includes('Click generate')) {
-                copyToClipboard(text);
+                copyToClipboard(text, elements.copyPinBtn);
             }
         });
 

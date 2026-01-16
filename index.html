@@ -23,6 +23,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
+    <!-- Font Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -302,6 +306,21 @@
                     </div>
                 </div>
 
+                <!-- PIN Strength Meter -->
+                <div class="strength-meter" id="pinStrengthMeter">
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="pinStrengthFill"></div>
+                    </div>
+                    <div class="strength-info">
+                        <span class="strength-label" id="pinStrengthLabel">--</span>
+                        <span class="strength-details">
+                            <span id="pinStrengthEntropy">0 bits</span>
+                            <span class="separator">·</span>
+                            <span id="pinStrengthTime">--</span>
+                        </span>
+                    </div>
+                </div>
+
                 <!-- PIN Options -->
                 <div class="options-card">
                     <div class="option-group length-group">
@@ -495,12 +514,33 @@
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2025 PassGen. All rights reserved.</p>
+            <p class="keyboard-hints" aria-label="Keyboard shortcuts">
+                <kbd>Ctrl</kbd>+<kbd>G</kbd> Regenerate
+                <span class="hint-separator">·</span>
+                <kbd>Ctrl</kbd>+<kbd>C</kbd> Copy
+            </p>
             <nav class="footer-links" aria-label="Footer navigation">
-                <a href="#privacy">Privacy</a>
+                <a href="#privacy-section">Privacy</a>
                 <a href="https://github.com/SirDuMonster/PassGen" target="_blank" rel="noopener noreferrer">GitHub</a>
             </nav>
         </div>
     </footer>
+
+    <!-- Privacy Section (Modal-like) -->
+    <section id="privacy-section" class="privacy-modal" aria-labelledby="privacy-heading">
+        <div class="privacy-content">
+            <a href="#" class="privacy-close" aria-label="Close privacy policy">&times;</a>
+            <h2 id="privacy-heading">Privacy Policy</h2>
+            <p><strong>PassGen collects zero data.</strong></p>
+            <ul>
+                <li><strong>No tracking:</strong> We don't use analytics, cookies, or any tracking scripts.</li>
+                <li><strong>No storage:</strong> Passwords are generated in your browser and never stored or transmitted.</li>
+                <li><strong>No accounts:</strong> No registration, no personal information collected.</li>
+                <li><strong>Open source:</strong> Our code is fully transparent and available on GitHub.</li>
+            </ul>
+            <p>Your privacy is absolute. Everything happens locally in your browser.</p>
+        </div>
+    </section>
 
     <!-- Scripts -->
     <script src="js/wordlist.js"></script>
