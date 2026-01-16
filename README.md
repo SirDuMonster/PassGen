@@ -24,7 +24,7 @@ All password generation happens directly in your browser using the Web Crypto AP
 
 ## Live Demo
 
-Visit [PassGen](https://passgen.vercel.app) to try it out.
+Visit [PassGen](https://passgen-liard.vercel.app) to try it out.
 
 ## License
 
