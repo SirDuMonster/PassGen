@@ -113,11 +113,13 @@
    ---------------------------------------- */
 .nav-dropdown {
     position: absolute;
-    top: calc(100% + var(--spacing-sm));
+    top: 100%;
     left: 50%;
-    transform: translateX(-50%) translateY(-8px);
+    transform: translateX(-50%);
     width: var(--dropdown-width);
     padding: var(--spacing-lg);
+    padding-top: calc(var(--spacing-lg) + 8px);
+    margin-top: 0;
     background: var(--color-bg-glass);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -132,9 +134,19 @@
     pointer-events: none;
     transition:
         opacity var(--transition-nav),
-        transform var(--transition-nav),
         visibility var(--transition-nav);
     z-index: 1000;
+}
+
+/* Invisible bridge to maintain hover when moving to dropdown */
+.nav-item.has-dropdown::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: transparent;
 }
 
 [data-theme="dark"] .nav-dropdown {
@@ -144,12 +156,13 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+/* Show dropdown on hover */
+.nav-item.has-dropdown:hover .nav-dropdown,
 .nav-item.dropdown-open .nav-dropdown,
 .nav-item:focus-within .nav-dropdown {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
 }
 
 .dropdown-section {
