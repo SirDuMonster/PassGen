@@ -392,6 +392,7 @@ body.nav-mobile-open {
 .section-tabs-list {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--spacing-xs);
     height: 100%;
     overflow-x: auto;

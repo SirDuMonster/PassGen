@@ -197,6 +197,13 @@
                                 <span class="style-example">xK7mP2nQ</span>
                             </span>
                         </label>
+                        <label class="style-option">
+                            <input type="radio" name="usernameStyle" value="custom">
+                            <span class="style-card">
+                                <span class="style-name">Custom Word</span>
+                                <span class="style-example">YourWord_42</span>
+                            </span>
+                        </label>
                     </div>
                 </div>
 
@@ -524,20 +531,24 @@
                 adjectiveNoun: `
                     <label class="checkbox-label">
                         <input type="checkbox" id="optIncludeNumber" checked>
+                        <span class="checkbox-custom"></span>
                         <span>Include number</span>
                     </label>
                 `,
                 gaming: `
                     <label class="checkbox-label">
                         <input type="checkbox" id="optPrefix" checked>
+                        <span class="checkbox-custom"></span>
                         <span>Include xX prefix</span>
                     </label>
                     <label class="checkbox-label">
                         <input type="checkbox" id="optSuffix" checked>
+                        <span class="checkbox-custom"></span>
                         <span>Include Xx suffix</span>
                     </label>
                     <label class="checkbox-label">
                         <input type="checkbox" id="optIncludeNumber">
+                        <span class="checkbox-custom"></span>
                         <span>Include number</span>
                     </label>
                 `,
@@ -549,6 +560,7 @@
                     </div>
                     <label class="checkbox-label">
                         <input type="checkbox" id="optIncludeNumber">
+                        <span class="checkbox-custom"></span>
                         <span>Include number</span>
                     </label>
                 `,
@@ -563,6 +575,22 @@
                         <label>Length: <span id="lengthValue">8</span></label>
                         <input type="range" id="optLength" min="6" max="16" value="8">
                     </div>
+                `,
+                custom: `
+                    <div class="custom-word-input">
+                        <label class="control-label">Your Base Word</label>
+                        <input type="text" id="optCustomWord" placeholder="Enter your word (e.g., Cwel)" maxlength="20" class="text-input">
+                    </div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="optIncludeNumber" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Include number</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="optIncludePrefix" checked>
+                        <span class="checkbox-custom"></span>
+                        <span>Add prefix/suffix variations</span>
+                    </label>
                 `
             };
 
@@ -652,15 +680,68 @@
                         const length = document.getElementById('optLength');
                         options.length = length ? parseInt(length.value) : 8;
                         break;
+
+                    case 'custom':
+                        const customWord = document.getElementById('optCustomWord');
+                        const customNumCheck = document.getElementById('optIncludeNumber');
+                        const customPrefixCheck = document.getElementById('optIncludePrefix');
+                        options.customWord = customWord ? customWord.value.trim() : '';
+                        options.includeNumber = customNumCheck ? customNumCheck.checked : true;
+                        options.includeVariations = customPrefixCheck ? customPrefixCheck.checked : true;
+                        break;
                 }
 
                 return options;
             }
 
+            // Generate custom word username variations
+            function generateCustomUsername(baseWord, options) {
+                if (!baseWord) baseWord = 'User';
+
+                const prefixes = ['The', 'Mr', 'Dr', 'Pro', 'Sir', 'x', 'Real', 'Its', 'Im', 'Official'];
+                const suffixes = ['_', '-', '.', 'HD', 'TV', 'Pro', 'YT', 'Official', 'Real', 'x'];
+                const decorators = ['_', '-', '.', '', 'x', 'X'];
+
+                const variations = [];
+                const rand = () => Math.floor(Math.random() * 100);
+                const randItem = arr => arr[Math.floor(Math.random() * arr.length)];
+
+                // Basic variations
+                variations.push(baseWord + (options.includeNumber ? rand() : ''));
+                variations.push(baseWord.toLowerCase() + (options.includeNumber ? rand() : ''));
+                variations.push(baseWord.toUpperCase() + (options.includeNumber ? rand() : ''));
+                variations.push(baseWord.charAt(0).toUpperCase() + baseWord.slice(1).toLowerCase() + (options.includeNumber ? rand() : ''));
+
+                if (options.includeVariations) {
+                    // Prefix variations
+                    variations.push(randItem(prefixes) + baseWord + (options.includeNumber ? rand() : ''));
+                    variations.push(randItem(prefixes) + randItem(decorators) + baseWord);
+
+                    // Suffix variations
+                    variations.push(baseWord + randItem(decorators) + randItem(suffixes));
+                    variations.push(baseWord + randItem(suffixes) + (options.includeNumber ? rand() : ''));
+
+                    // Combined variations
+                    variations.push(randItem(prefixes) + baseWord + randItem(suffixes));
+                    variations.push('xX' + baseWord + 'Xx');
+                    variations.push(baseWord + '_Official');
+                    variations.push('The' + baseWord + (options.includeNumber ? rand() : ''));
+                }
+
+                // Shuffle and return unique variations
+                return [...new Set(variations)].sort(() => Math.random() - 0.5);
+            }
+
             // Generate and display usernames
             function generateUsernames() {
                 const options = getOptions();
-                const usernames = UsernameGenerator.generateMultiple(selectedCount, currentStyle, options);
+                let usernames;
+
+                if (currentStyle === 'custom') {
+                    usernames = generateCustomUsername(options.customWord, options).slice(0, selectedCount);
+                } else {
+                    usernames = UsernameGenerator.generateMultiple(selectedCount, currentStyle, options);
+                }
 
                 usernamesOutput.innerHTML = usernames.map(username => `
                     <div class="username-item" data-username="${username}">
@@ -915,6 +996,34 @@
             color: var(--text-secondary);
         }
 
+        .custom-word-input {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .text-input {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--surface-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+        }
+
+        .text-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
         @media (max-width: 600px) {
             .style-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -928,6 +1037,10 @@
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
+            }
+
+            .custom-word-input {
+                max-width: 100%;
             }
         }
     </style>
