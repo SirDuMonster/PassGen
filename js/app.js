@@ -469,9 +469,28 @@
 
         elements.regeneratePinBtn.addEventListener('click', generatePIN);
 
-        syncSliderInput(elements.pinLength, elements.pinLengthInput, generatePIN);
+        syncSliderInput(elements.pinLength, elements.pinLengthInput, () => {
+            // If no repeated digits is checked and length > 10, uncheck it
+            const length = parseInt(elements.pinLength.value, 10);
+            if (length > 10 && elements.noRepeatedDigits.checked) {
+                elements.noRepeatedDigits.checked = false;
+                showToast('No repeated digits disabled (max 10 unique digits)');
+            }
+            generatePIN();
+        });
 
-        elements.noRepeatedDigits.addEventListener('change', generatePIN);
+        elements.noRepeatedDigits.addEventListener('change', () => {
+            // If enabling no repeated digits and length > 10, cap it at 10
+            if (elements.noRepeatedDigits.checked) {
+                const length = parseInt(elements.pinLength.value, 10);
+                if (length > 10) {
+                    elements.pinLength.value = 10;
+                    elements.pinLengthInput.value = 10;
+                    showToast('PIN length reduced to 10 (max unique digits)');
+                }
+            }
+            generatePIN();
+        });
         elements.noSequentialDigits.addEventListener('change', generatePIN);
 
         // Bulk generator
