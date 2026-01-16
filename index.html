@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navigation.css">
 </head>
-<body class="home-page">
+<body class="has-section-tabs">
     <!-- Skip to Content -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
@@ -50,55 +50,6 @@
             <!-- Main Navigation -->
             <nav class="nav-main" aria-label="Main navigation">
                 <ul class="nav-menu">
-                    <li class="nav-item has-dropdown">
-                        <a href="/" class="nav-link nav-dropdown-toggle active" aria-expanded="false" aria-haspopup="true">
-                            Tools
-                        </a>
-                        <div class="nav-dropdown" role="menu">
-                            <div class="dropdown-section">
-                                <span class="dropdown-section-title">Generate</span>
-                                <div class="dropdown-grid">
-                                    <a href="/" class="dropdown-link" role="menuitem">
-                                        <span class="dropdown-icon">🔐</span>
-                                        Password
-                                    </a>
-                                    <a href="/passphrase-generator/" class="dropdown-link" role="menuitem">
-                                        <span class="dropdown-icon">📖</span>
-                                        Passphrase
-                                    </a>
-                                    <a href="/pin-generator/" class="dropdown-link" role="menuitem">
-                                        <span class="dropdown-icon">🔢</span>
-                                        PIN
-                                    </a>
-                                    <a href="/wifi-password-generator/" class="dropdown-link" role="menuitem">
-                                        <span class="dropdown-icon">📡</span>
-                                        WiFi Password
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="dropdown-section">
-                                <span class="dropdown-section-title">More Tools</span>
-                                <div class="dropdown-grid">
-                                    <a href="/bulk-password-generator/" class="dropdown-link" role="menuitem">
-                                        <span class="dropdown-icon">📋</span>
-                                        Bulk Generator
-                                    </a>
-                                    <a href="/username-generator/" class="dropdown-link" role="menuitem">
-                                        <span class="dropdown-icon">👤</span>
-                                        Username
-                                    </a>
-                                    <a href="/memorable-password-generator/" class="dropdown-link" role="menuitem">
-                                        <span class="dropdown-icon">🧠</span>
-                                        Memorable
-                                    </a>
-                                    <a href="/password-strength-checker/" class="dropdown-link" role="menuitem">
-                                        <span class="dropdown-icon">✓</span>
-                                        Strength Checker
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
                     <li class="nav-item">
                         <a href="/blog/" class="nav-link">Blog</a>
                     </li>
@@ -169,6 +120,23 @@
                 <a href="/about/" class="nav-mobile-link">About Us</a>
                 <a href="/contact/" class="nav-mobile-link">Contact</a>
                 <a href="/privacy/" class="nav-mobile-link">Privacy Policy</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Tabs -->
+    <nav class="section-tabs" aria-label="Password tools">
+        <div class="section-tabs-container">
+            <div class="section-tabs-list">
+                <a href="/" class="section-tab active">Password</a>
+                <a href="/passphrase-generator/" class="section-tab">Passphrase</a>
+                <a href="/pin-generator/" class="section-tab">PIN</a>
+                <a href="/wifi-password-generator/" class="section-tab">WiFi</a>
+                <a href="/bulk-password-generator/" class="section-tab">Bulk</a>
+                <a href="/username-generator/" class="section-tab">Username</a>
+                <a href="/memorable-password-generator/" class="section-tab">Memorable</a>
+                <a href="/strong-password-generator/" class="section-tab">Strong</a>
+                <a href="/password-strength-checker/" class="section-tab">Checker</a>
             </div>
         </div>
     </nav>

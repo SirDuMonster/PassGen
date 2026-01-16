@@ -623,7 +623,4 @@ body.nav-mobile-open {
     padding-top: var(--spacing-lg);
 }
 
-/* Home page keeps generator tabs as primary nav */
-.home-page .section-tabs {
-    display: none;
-}
+/* Section tabs always visible */
