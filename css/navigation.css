@@ -120,15 +120,12 @@
     padding: var(--spacing-lg);
     padding-top: calc(var(--spacing-lg) + 8px);
     margin-top: 0;
-    background: var(--color-bg-glass);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.15),
-        0 4px 12px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        0 4px 12px rgba(0, 0, 0, 0.08);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
