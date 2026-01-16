@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassGen - Free Secure Password Generator</title>
+    <meta name="description" content="Generate strong, random passwords instantly. 100% free, works offline, no data stored. Create secure passwords, PINs, and passphrases.">
+    <meta name="keywords" content="password generator, secure password, random password, passphrase generator, PIN generator, strong password">
+    <meta name="author" content="PassGen">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="PassGen - Free Secure Password Generator">
+    <meta property="og:description" content="Generate strong, random passwords instantly. 100% free, works offline, no data stored.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://passgen.app">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="PassGen - Free Secure Password Generator">
+    <meta name="twitter:description" content="Generate strong, random passwords instantly. 100% free, works offline, no data stored.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo" aria-label="PassGen Home">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="6" y="14" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 14V10C10 6.68629 12.6863 4 16 4C19.3137 4 22 6.68629 22 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="16" cy="21" r="2" fill="currentColor"/>
+                </svg>
+                <span class="logo-text">PassGen</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                <svg class="theme-icon sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="theme-icon moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="hero-title">Secure passwords, instantly.</h1>
+                <p class="hero-subtitle">Your passwords never leave your browser</p>
+            </section>
+
+            <!-- AD PLACEHOLDER: Top Banner 728x90 - Below Hero -->
+            <div class="ad-placeholder ad-banner ad-top" aria-hidden="true">
+                <span>Advertisement</span>
+            </div>
+
+            <!-- Generator Tabs -->
+            <div class="generator-tabs" role="tablist" aria-label="Password generator types">
+                <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="password-panel" id="password-tab" data-tab="password">Password</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="passphrase-panel" id="passphrase-tab" data-tab="passphrase">Passphrase</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="pin-panel" id="pin-tab" data-tab="pin">PIN</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="bulk-panel" id="bulk-tab" data-tab="bulk">Bulk</button>
+            </div>
+
+            <!-- Password Panel -->
+            <section class="generator-panel active" id="password-panel" role="tabpanel" aria-labelledby="password-tab">
+                <!-- Password Display -->
+                <div class="password-display-card">
+                    <div class="password-output" id="passwordOutput" aria-live="polite" aria-label="Generated password">
+                        <span class="password-text" id="passwordText">Click generate to create a password</span>
+                    </div>
+                    <div class="password-actions">
+                        <button class="btn btn-primary" id="copyBtn" aria-label="Copy password to clipboard">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            <span>Copy</span>
+                        </button>
+                        <button class="btn btn-secondary" id="regenerateBtn" aria-label="Generate new password">
+                            <svg class="regenerate-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"/>
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                            </svg>
+                            <span>Regenerate</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Strength Meter -->
+                <div class="strength-meter" id="strengthMeter">
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <div class="strength-info">
+                        <span class="strength-label" id="strengthLabel">--</span>
+                        <span class="strength-details">
+                            <span id="strengthEntropy">0 bits</span>
+                            <span class="separator">·</span>
+                            <span id="strengthTime">--</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Password Options -->
+                <div class="options-card">
+                    <!-- Length Slider -->
+                    <div class="option-group length-group">
+                        <label for="passwordLength" class="option-label">Length</label>
+                        <div class="length-controls">
+                            <input type="range" id="passwordLength" class="length-slider" min="4" max="128" value="16" aria-label="Password length">
+                            <input type="number" id="passwordLengthInput" class="length-input" min="4" max="128" value="16" aria-label="Password length value">
+                        </div>
+                    </div>
+
+                    <!-- Character Options -->
+                    <div class="option-group checkboxes-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="uppercase" checked>
+                            <span class="checkbox-custom"></span>
+                            <span>Uppercase (A-Z)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="lowercase" checked>
+                            <span class="checkbox-custom"></span>
+                            <span>Lowercase (a-z)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="numbers" checked>
+                            <span class="checkbox-custom"></span>
+                            <span>Numbers (0-9)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="symbols" checked>
+                            <span class="checkbox-custom"></span>
+                            <span>Symbols (!@#$%...)</span>
+                        </label>
+                    </div>
+
+                    <!-- Advanced Options -->
+                    <details class="advanced-options" id="advancedOptions">
+                        <summary class="advanced-toggle">
+                            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                            Advanced Options
+                        </summary>
+                        <div class="advanced-content">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="excludeAmbiguous">
+                                <span class="checkbox-custom"></span>
+                                <span>Exclude ambiguous (0O1lI|)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="excludeBrackets">
+                                <span class="checkbox-custom"></span>
+                                <span>Exclude brackets ({}[]()\/'")</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="beginWithLetter">
+                                <span class="checkbox-custom"></span>
+                                <span>Begin with a letter</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="noRepeating">
+                                <span class="checkbox-custom"></span>
+                                <span>No repeating characters</span>
+                            </label>
+                            <div class="option-row">
+                                <label for="minNumbers" class="option-label-small">Minimum numbers:</label>
+                                <input type="number" id="minNumbers" class="mini-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="option-row">
+                                <label for="minSymbols" class="option-label-small">Minimum symbols:</label>
+                                <input type="number" id="minSymbols" class="mini-input" min="0" max="10" value="0">
+                            </div>
+                            <div class="option-row">
+                                <label for="customSymbols" class="option-label-small">Custom symbols:</label>
+                                <input type="text" id="customSymbols" class="text-input" placeholder="!@#$%^&*()_+-=[]{}|;:,.<>?">
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Passphrase Panel -->
+            <section class="generator-panel" id="passphrase-panel" role="tabpanel" aria-labelledby="passphrase-tab" hidden>
+                <!-- Passphrase Display -->
+                <div class="password-display-card">
+                    <div class="password-output" aria-live="polite" aria-label="Generated passphrase">
+                        <span class="password-text passphrase-text" id="passphraseText">Click generate to create a passphrase</span>
+                    </div>
+                    <div class="password-actions">
+                        <button class="btn btn-primary" id="copyPassphraseBtn" aria-label="Copy passphrase to clipboard">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            <span>Copy</span>
+                        </button>
+                        <button class="btn btn-secondary" id="regeneratePassphraseBtn" aria-label="Generate new passphrase">
+                            <svg class="regenerate-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"/>
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                            </svg>
+                            <span>Regenerate</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Passphrase Strength Meter -->
+                <div class="strength-meter" id="passphraseStrengthMeter">
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="passphraseStrengthFill"></div>
+                    </div>
+                    <div class="strength-info">
+                        <span class="strength-label" id="passphraseStrengthLabel">--</span>
+                        <span class="strength-details">
+                            <span id="passphraseStrengthEntropy">0 bits</span>
+                            <span class="separator">·</span>
+                            <span id="passphraseStrengthTime">--</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Passphrase Options -->
+                <div class="options-card">
+                    <div class="option-group length-group">
+                        <label for="wordCount" class="option-label">Word Count</label>
+                        <div class="length-controls">
+                            <input type="range" id="wordCount" class="length-slider" min="3" max="8" value="4" aria-label="Word count">
+                            <input type="number" id="wordCountInput" class="length-input" min="3" max="8" value="4" aria-label="Word count value">
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="separator" class="option-label">Separator</label>
+                        <select id="separator" class="select-input">
+                            <option value="-">Hyphen (-)</option>
+                            <option value="_">Underscore (_)</option>
+                            <option value=" ">Space</option>
+                            <option value=".">Period (.)</option>
+                            <option value="">None</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="capitalize" class="option-label">Capitalization</label>
+                        <select id="capitalize" class="select-input">
+                            <option value="none">lowercase</option>
+                            <option value="first" selected>First Letter</option>
+                            <option value="all">ALL CAPS</option>
+                        </select>
+                    </div>
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeNumber">
+                        <span class="checkbox-custom"></span>
+                        <span>Include a number</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- PIN Panel -->
+            <section class="generator-panel" id="pin-panel" role="tabpanel" aria-labelledby="pin-tab" hidden>
+                <!-- PIN Display -->
+                <div class="password-display-card">
+                    <div class="password-output" aria-live="polite" aria-label="Generated PIN">
+                        <span class="password-text pin-text" id="pinText">Click generate to create a PIN</span>
+                    </div>
+                    <div class="password-actions">
+                        <button class="btn btn-primary" id="copyPinBtn" aria-label="Copy PIN to clipboard">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            <span>Copy</span>
+                        </button>
+                        <button class="btn btn-secondary" id="regeneratePinBtn" aria-label="Generate new PIN">
+                            <svg class="regenerate-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"/>
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                            </svg>
+                            <span>Regenerate</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PIN Options -->
+                <div class="options-card">
+                    <div class="option-group length-group">
+                        <label for="pinLength" class="option-label">Length</label>
+                        <div class="length-controls">
+                            <input type="range" id="pinLength" class="length-slider" min="4" max="12" value="4" aria-label="PIN length">
+                            <input type="number" id="pinLengthInput" class="length-input" min="4" max="12" value="4" aria-label="PIN length value">
+                        </div>
+                    </div>
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="noRepeatedDigits">
+                        <span class="checkbox-custom"></span>
+                        <span>No repeated digits</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="noSequentialDigits">
+                        <span class="checkbox-custom"></span>
+                        <span>No sequential digits (123, 321)</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Bulk Panel -->
+            <section class="generator-panel" id="bulk-panel" role="tabpanel" aria-labelledby="bulk-tab" hidden>
+                <!-- Bulk Controls -->
+                <div class="options-card bulk-controls">
+                    <div class="option-group length-group">
+                        <label for="bulkCount" class="option-label">Number of Passwords</label>
+                        <div class="length-controls">
+                            <input type="range" id="bulkCount" class="length-slider" min="1" max="100" value="10" aria-label="Number of passwords">
+                            <input type="number" id="bulkCountInput" class="length-input" min="1" max="100" value="10" aria-label="Number of passwords value">
+                        </div>
+                    </div>
+                    <div class="bulk-actions">
+                        <button class="btn btn-primary" id="generateBulkBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            <span>Generate</span>
+                        </button>
+                        <button class="btn btn-secondary" id="copyAllBtn" disabled>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            <span>Copy All</span>
+                        </button>
+                        <button class="btn btn-secondary" id="downloadCsvBtn" disabled>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            <span>Download CSV</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bulk Password List -->
+                <div class="bulk-list-container">
+                    <ul class="bulk-list" id="bulkList" aria-label="Generated passwords list">
+                        <li class="bulk-placeholder">Generated passwords will appear here</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Ad Placeholder - Below Generator -->
+            <!-- AD PLACEHOLDER: Header Banner 728x90 -->
+            <div class="ad-placeholder ad-banner" aria-hidden="true">
+                <span>Advertisement</span>
+            </div>
+
+            <!-- Security Notice -->
+            <section class="security-notice">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <polyline points="9 12 12 15 16 10"/>
+                </svg>
+                <p><strong>100% Secure:</strong> All passwords are generated locally in your browser using cryptographically secure random generation. No data is ever sent to any server.</p>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section" aria-labelledby="faq-heading">
+                <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Is PassGen safe to use?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Yes, PassGen is completely safe. All password generation happens directly in your browser using the Web Crypto API (<code>crypto.getRandomValues()</code>), which provides cryptographically secure random values. Your passwords are never transmitted over the internet or stored anywhere.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>What makes a strong password?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>A strong password typically has:</p>
+                            <ul>
+                                <li>At least 12-16 characters in length</li>
+                                <li>A mix of uppercase and lowercase letters</li>
+                                <li>Numbers and special symbols</li>
+                                <li>No personal information or common words</li>
+                                <li>True randomness (not human-generated patterns)</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>How does PassGen generate passwords?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>PassGen uses your browser's built-in cryptographic random number generator (<code>crypto.getRandomValues()</code>). This is the same technology used by banks and security applications. Each character is selected completely at random from the character set you choose, ensuring maximum unpredictability.</p>
+                        </div>
+                    </details>
+
+                    <!-- AD PLACEHOLDER: In-Content 468x60 - Between FAQ Items -->
+                    <div class="ad-placeholder ad-inline" aria-hidden="true">
+                        <span>Advertisement</span>
+                    </div>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Are my passwords stored anywhere?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>No. PassGen never stores, transmits, or logs your generated passwords. The application runs entirely in your browser with no backend server. Once you leave the page, your generated passwords are gone forever unless you've copied them.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>How long should my password be?</span>
+                            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>We recommend at least 16 characters for most accounts. For high-security accounts (banking, email, password managers), consider 20+ characters. The password strength meter will help you understand how secure your chosen length is against brute-force attacks.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Ad Placeholder - Footer -->
+            <!-- AD PLACEHOLDER: Footer Banner 728x90 -->
+            <div class="ad-placeholder ad-banner" aria-hidden="true">
+                <span>Advertisement</span>
+            </div>
+        </div>
+
+        <!-- Ad Placeholder - Sidebar (Desktop) -->
+        <!-- AD PLACEHOLDER: Sidebar 300x250 -->
+        <aside class="ad-sidebar" aria-hidden="true">
+            <div class="ad-placeholder ad-rectangle">
+                <span>Advertisement</span>
+            </div>
+            <!-- AD PLACEHOLDER: Sidebar 300x250 - Second Unit -->
+            <div class="ad-placeholder ad-rectangle ad-sidebar-second">
+                <span>Advertisement</span>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="alert" aria-live="assertive">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        <span id="toastMessage">Copied!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PassGen. All rights reserved.</p>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="#privacy">Privacy</a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/wordlist.js"></script>
+    <script src="js/generator.js"></script>
+    <script src="js/strength.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

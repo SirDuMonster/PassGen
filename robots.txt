@@ -1,0 +1,8 @@
+# PassGen - robots.txt
+# https://passgen.app
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://passgen.app/sitemap.xml
